@@ -14,6 +14,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
 
 public class MainWindow {
 
@@ -71,22 +72,14 @@ public class MainWindow {
 
 		JButton btnMerge = new JButton("Merge");
 		optionPane.add(btnMerge);
-
-		JSplitPane splitPane = new JSplitPane();
-		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		splitPane.setLeftComponent(scrollPane);
+		JPanel userPane = new JPanel();
+		frame.getContentPane().add(userPane, BorderLayout.WEST);
 		
 		JPanel mergedPane = new JPanel();
-		StateView t = new StateView();
-		t.setVisible(true);
-		mergedPane.add(t);
-		panel.add(t);
-		optionPane.add(t);
-		splitPane.setRightComponent(mergedPane);
-		
-		
+		frame.getContentPane().add(mergedPane, BorderLayout.CENTER);		
+		mergedPane.add(new StateView("1"));
+		mergedPane.add(new StateView("2"));
 		
 	}
 
