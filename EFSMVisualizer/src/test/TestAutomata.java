@@ -3,8 +3,10 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
+import java.util.Random;
 
 import model.Automata;
+import model.EFSMController;
 import model.State;
 import model.Transition;
 
@@ -12,13 +14,43 @@ import org.junit.Test;
 
 public class TestAutomata {
 
-	private Automata automata = new Automata();
-	
 	@Test
-	public void test() {
-		// fail("Not yet implemented");
+	public void testMerge() {
+		Automata srcAutomata = new Automata();
+		
+		for(int i = 0; i < 10; ++i) {
+			Transition t
+			= new Transition.TransitionBuilder(new State(i), new State(i+1))
+			.x(10)
+			.y(30)
+			.event("onSlide" + String.valueOf(new Random().nextInt(10)))
+			.target("t1")
+			.timestamp(100)
+			.createTransition();
+			
+			srcAutomata.addStateSeq(t);
+		}
+		
+		Automata dstAutomata = new Automata();
+		
+		for(int i = 0; i < 3; ++i) {
+			Transition t
+			= new Transition.TransitionBuilder(new State(i), new State(i+1))
+			.x(10)
+			.y(30)
+			.event("onSlide" + String.valueOf(new Random().nextInt(3)))
+			.target("t1")
+			.timestamp(100)
+			.createTransition();
+			
+			dstAutomata.addStateSeq(t);
+		}
+		
+		EFSMController.merge(srcAutomata, dstAutomata, 2);
+	
 	}
 	
+	/*
 	@Test
 	public void testAddEqualState() {
 		Automata automata = new Automata();
@@ -58,7 +90,7 @@ public class TestAutomata {
 		assertEquals(expectedEvent, t.getEvent());
 		assertEquals(expectedTarget.iterator(), t.getTargets());
 	}
-	
+	*/
 	
 
 }

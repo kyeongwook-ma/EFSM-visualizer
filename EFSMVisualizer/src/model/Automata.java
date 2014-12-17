@@ -20,17 +20,19 @@ public class Automata {
 	
 	public void addStateSeq(Transition transition) {
 	
-		/* start stateÀÎ °æ¿ì ±×³É Ãß°¡ */
+		/* start stateï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½×³ï¿½ ï¿½ß°ï¿½ */
 		if(seqs.size() == 0) {
 			seqs.add(transition);
 			return;
 		}
 		
-		/* ¸¶Áö¸· transition °ú ºñ±³ÇÏ¿© °°À¸¸é È®Àå½ÃÅ´ */
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ transition ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Å´ */
 		Transition lastTransition = seqs.getLast();
 			
 		if(lastTransition.equals(transition)) {
 			lastTransition.expend(transition);			
+		} else {
+			seqs.add(transition);
 		}
 	}
 	

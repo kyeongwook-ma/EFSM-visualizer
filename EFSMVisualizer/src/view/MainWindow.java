@@ -73,13 +73,19 @@ public class MainWindow {
 		JButton btnMerge = new JButton("Merge");
 		optionPane.add(btnMerge);
 		
-		JPanel userPane = new JPanel();
-		frame.getContentPane().add(userPane, BorderLayout.WEST);
+		JSplitPane splitPane = new JSplitPane();
+		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		JPanel mergedPane = new JPanel();
-		frame.getContentPane().add(mergedPane, BorderLayout.CENTER);		
 		mergedPane.add(new StateView("1"));
 		mergedPane.add(new StateView("2"));
+		
+		JPanel userPane = new JPanel();
+		userPane.setBackground(Color.WHITE);
+		
+		splitPane.setLeftComponent(userPane);
+		splitPane.setRightComponent(mergedPane);
+
 		
 	}
 

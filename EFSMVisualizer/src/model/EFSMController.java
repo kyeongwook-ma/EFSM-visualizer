@@ -2,32 +2,38 @@ package model;
 
 /**
  * @author se
- * EFSM ´Ù·ç´Â Å¬·¡½º
- * K ´Â GK-tailÀÇ »ó¼ö°ª
+ * EFSM ï¿½Ù·ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+ * K ï¿½ï¿½ GK-tailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 public class EFSMController {
 
-	private int K = 2;
-	
 	/**
-	 * EFSM À» GK-tail¾Ë°í¸®ÁòÀ¸·Î º´ÇÕ½ÃÅ²´Ù.
+	 * EFSM ï¿½ï¿½ GK-tailï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Õ½ï¿½Å²ï¿½ï¿½.
 	 * @param src 
 	 * @param dst
 	 */
-	public void merge(Automata src, Automata dst) {
-		
-		int range = src.size() > dst.size() ? src.size() : dst.size();
-		
+	public static void merge(Automata src, Automata dst, int k) {
+
+		int range = minSize(src, dst);
+
+		if(range < 0) return;
+
 		for(int i = 0; i < range;  ++i) {
-			Transition srcT1 = src.get(i);
-			Transition srcT2 = src.get(i+1);
+			System.out.println("");
 			
-			Transition dstT1 = dst.get(i);
-			Transition dstT2 = dst.get(i+1);
-			
-			
+			for(int j = i; j < k; ++j) {
+				System.out.println(j);
+				Transition srcTran = src.get(j);
+				Transition dstTran = dst.get(j);
+				
+				System.out.print(srcTran.toString() + dstTran.toString());
+			}
 		}
-		
+
 	}
-	
+
+	private static int minSize(Automata src, Automata dst) {
+		return src.size() > dst.size() ? dst.size() : src.size();
+	}
+
 }
