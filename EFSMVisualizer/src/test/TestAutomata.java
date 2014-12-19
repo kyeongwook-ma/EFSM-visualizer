@@ -33,7 +33,7 @@ public class TestAutomata {
 		
 		Automata dstAutomata = new Automata();
 		
-		for(int i = 0; i < 3; ++i) {
+		for(int i = 0; i < 4; ++i) {
 			Transition t
 			= new Transition.TransitionBuilder(new State(i), new State(i+1))
 			.x(10)

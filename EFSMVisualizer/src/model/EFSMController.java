@@ -18,10 +18,10 @@ public class EFSMController {
 
 		if(range < 0) return;
 
-		for(int i = 0; i < range;  ++i) {
+		for(int i = 0; i < range; ++i) {
 			System.out.println("");
 			
-			for(int j = i; j < k; ++j) {
+			for(int j = i; j < i + 2; ++j) {
 				System.out.println(j);
 				Transition srcTran = src.get(j);
 				Transition dstTran = dst.get(j);
