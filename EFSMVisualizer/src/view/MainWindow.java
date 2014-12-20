@@ -14,6 +14,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.State;
+
 public class MainWindow {
 
 	private JFrame frame;
@@ -54,6 +56,7 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
+		
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
 		logArea.setColumns(8);
@@ -84,15 +87,15 @@ public class MainWindow {
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		JPanel mergedPane = new JPanel();
-		mergedPane.add(new StateView("1"));
-		mergedPane.add(new StateView("2"));
+
+		ImageCasher.getImage("arrow.png");
 		
 		JPanel userPane = new JPanel();
 		userPane.setBackground(Color.WHITE);
 		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
-
+		
 		
 	}
 
