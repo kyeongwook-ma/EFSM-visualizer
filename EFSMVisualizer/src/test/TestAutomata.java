@@ -50,7 +50,6 @@ public class TestAutomata {
 	
 	}
 	
-	/*
 	@Test
 	public void testAddEqualState() {
 		Automata automata = new Automata();
@@ -88,9 +87,17 @@ public class TestAutomata {
 		assertEquals(expectedX, t.getX(), 0.001);
 		assertEquals(expectedY, t.getY(), 0.001);
 		assertEquals(expectedEvent, t.getEvent());
-		assertEquals(expectedTarget.iterator(), t.getTargets());
 	}
-	*/
+	
+	
+	@Test
+	public void testState() {
+		State s1 = new State(1);
+		State s2 = new State(1);
+		State s3 = new State(3);
+		assertEquals(true, s1.equals(s2));
+		assertEquals(false, s1.equals(s3));
+	}
 	
 
 }
