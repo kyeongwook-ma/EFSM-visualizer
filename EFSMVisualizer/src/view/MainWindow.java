@@ -14,8 +14,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import model.State;
-
 public class MainWindow {
 
 	private JFrame frame;

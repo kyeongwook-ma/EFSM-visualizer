@@ -2,10 +2,7 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 public class ArrowView extends JComponent {
@@ -13,11 +10,7 @@ public class ArrowView extends JComponent {
 	private Image img;
 	
 	public ArrowView() {
-		try {
-			img = ImageIO.read(new File("./res/arrow.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		img = ImageCasher.getImage("arrow.png");
 	}
 
 	@Override
