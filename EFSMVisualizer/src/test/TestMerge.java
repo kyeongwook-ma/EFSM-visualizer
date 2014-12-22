@@ -28,6 +28,7 @@ public class TestMerge {
 		.x(30).y(40).event("onSlide").timestamp(300).target("d")
 		.createTransition();
 		
+		answerAutomata.addStateSeq(t1);
 		
 		
 		return answerAutomata;

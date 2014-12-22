@@ -38,22 +38,19 @@ public class Automata {
 		return false;
 	}
 
-	public void addStateSeq(Transition transition) {
-
-		/* start state�� ��� �׳� �߰� */
-		if(transitionSeqs.size() == 0) {
-			transitionSeqs.add(transition);
-			return;
+	public void addStateSeq(Transition... transitions) {
+		
+		for(Transition t : transitions) {
+			/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
+			Transition lastTransition = transitionSeqs.getLast();
+			
+			if(lastTransition.equals(t)) {
+				lastTransition.expend(t);			
+			} else {
+				transitionSeqs.add(t);
+			}
 		}
-
-		/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
-		Transition lastTransition = transitionSeqs.getLast();
-
-		if(lastTransition.equals(transition)) {
-			lastTransition.expend(transition);			
-		} else {
-			transitionSeqs.add(transition);
-		}
+		
 	}
 
 	public Transition startTransition() {
