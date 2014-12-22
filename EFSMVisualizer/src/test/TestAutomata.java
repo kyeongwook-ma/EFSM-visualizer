@@ -1,8 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashSet;
 import java.util.Random;
 
 import model.Automata;
