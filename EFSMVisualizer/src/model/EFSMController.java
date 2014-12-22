@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * @author se
  * EFSM �ٷ�� Ŭ����
@@ -18,20 +19,16 @@ public class EFSMController {
 
 		if(range < 0) return;
 
-		for(int i = 0; i < range;  ++i) {
-			System.out.println("");
-			
-			for(int j = i; j < k; ++j) {
-				System.out.println(j);
+		for(int i = 0; i < range - k; ++i) {			
+			for(int j = i; j < i + k; ++j) {
 				Transition srcTran = src.get(j);
 				Transition dstTran = dst.get(j);
 				
 				System.out.print(srcTran.toString() + dstTran.toString());
 			}
 		}
-
 	}
-
+	
 	private static int minSize(Automata src, Automata dst) {
 		return src.size() > dst.size() ? dst.size() : src.size();
 	}

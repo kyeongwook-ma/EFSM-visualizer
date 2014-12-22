@@ -12,7 +12,11 @@ public class State {
 		return stateId;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		State s = (State) obj;
+		return this.stateId == s.getStateId() ? true : false;
+	}
 
 
 

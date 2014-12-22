@@ -1,26 +1,20 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultButtonModel;
-import javax.swing.Icon;
 import javax.swing.JButton;
+
+import model.State;
 
 public class StateView extends JButton {
 	
-	public StateView(String label) {
+	public StateView(State state) {
 		
-		super(label);
+		super(String.valueOf(state.getStateId()));
 	// These statements enlarge the button so that it 
 	// becomes a circle rather than an oval.
 	    Dimension size = getPreferredSize();

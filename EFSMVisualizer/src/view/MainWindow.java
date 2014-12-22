@@ -4,17 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.border.LineBorder;
 
 public class MainWindow {
 
@@ -56,6 +54,7 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
+		
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
 		logArea.setColumns(8);
@@ -72,20 +71,29 @@ public class MainWindow {
 
 		JButton btnMerge = new JButton("Merge");
 		optionPane.add(btnMerge);
+		btnMerge.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				
+			}
+		});
+		
 		
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		JPanel mergedPane = new JPanel();
-		mergedPane.add(new StateView("1"));
-		mergedPane.add(new StateView("2"));
+
+		ImageCasher.getImage("arrow.png");
 		
 		JPanel userPane = new JPanel();
 		userPane.setBackground(Color.WHITE);
 		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
-
+		
 		
 	}
 
