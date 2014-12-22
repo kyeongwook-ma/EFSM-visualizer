@@ -1,4 +1,5 @@
 package model;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,9 +41,13 @@ public class Automata {
 
 	public void addStateSeq(Transition... transitions) {
 		
+		if(transitionSeqs.size() == 0) {
+			transitionSeqs.addAll(Arrays.asList(transitions));
+		}
+			
 		for(Transition t : transitions) {
 			/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
-			Transition lastTransition = transitionSeqs.getLast();
+			Transition lastTransition = endTransition();
 			
 			if(lastTransition.equals(t)) {
 				lastTransition.expend(t);			
@@ -52,7 +57,7 @@ public class Automata {
 		}
 		
 	}
-
+	
 	public Transition startTransition() {
 		return transitionSeqs.getFirst();
 	}
