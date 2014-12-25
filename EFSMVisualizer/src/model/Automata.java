@@ -2,6 +2,7 @@ package model;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Automata {
 
@@ -64,6 +65,19 @@ public class Automata {
 
 	public Transition endTransition() {
 		return transitionSeqs.getLast();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		ListIterator<Transition> listIter = transitionSeqs.listIterator();
+		while(listIter.hasNext()) {
+			Transition t = listIter.next();
+			sb.append(t.toString());
+		}
+
+		return sb.toString();
 	}
 
 }

@@ -1,5 +1,7 @@
 package test;
 
+import org.junit.Test;
+
 import model.Automata;
 import model.EFSMController;
 import model.State;
@@ -7,13 +9,18 @@ import model.Transition;
 
 public class TestMerge {
 
+	@Test
 	public void testMergeWithGKTail() {
 				
 		Automata dstAutomata = getDstAutomata();
 		Automata srcAutomata = getSrcAutomata();
-	
+		
+		Automata mergedAutomata;
+		
 		try {
-			EFSMController.merge(srcAutomata, dstAutomata, 2);
+			mergedAutomata = EFSMController.merge(srcAutomata, dstAutomata, 2);
+			System.out.println(mergedAutomata.toString());
+			
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}
