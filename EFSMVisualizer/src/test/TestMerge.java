@@ -12,7 +12,11 @@ public class TestMerge {
 		Automata dstAutomata = getDstAutomata();
 		Automata srcAutomata = getSrcAutomata();
 	
-		EFSMController.merge(srcAutomata, dstAutomata, 2);
+		try {
+			EFSMController.merge(srcAutomata, dstAutomata, 2);
+		} catch (Exception e) {		
+			e.printStackTrace();
+		}
 	}
 	
 	private Automata getSrcAutomata() {

@@ -11,9 +11,7 @@ public class EFSMView extends JPanel {
 	private Automata automata;
 	
 	public EFSMView(Automata automata) {
-		
 		this.automata = automata;
-		
 	}
 	
 	@Override

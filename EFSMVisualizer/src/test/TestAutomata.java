@@ -42,7 +42,11 @@ public class TestAutomata {
 			dstAutomata.addStateSeq(t);
 		}
 		
-		EFSMController.merge(srcAutomata, dstAutomata, 2);
+		try {
+			EFSMController.merge(srcAutomata, dstAutomata, 2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 	}
 	

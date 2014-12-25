@@ -5,8 +5,8 @@ import java.util.Iterator;
 
 /**
  * @author se
- * State °£ÀÇ transitionÀ» ³ªÅ¸³»´Â Å¬·¡½º
- * Ãâ¹ßÁ¡(src)¿Í µµÂøÁ¡(dst)¸¦ °¡Áö°í ÀÖ´Ù.
+ * State ï¿½ï¿½ï¿½ï¿½ transitionï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½(src)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(dst)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½.
  */
 public class Transition {
 	
@@ -70,12 +70,12 @@ public class Transition {
 	
 	/**
 	 * @author se
-	 * TrnasitionÀÇ builder Å¬·¡½º
+	 * Trnasitionï¿½ï¿½ builder Å¬ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * ex)
 	 * new Transition.TransBuilder(src, dst)
 	 * .x(30).y(40)
-	 * // ±âÅ¸ attribute ÇÒ´ç
+	 * // ï¿½ï¿½Å¸ attribute ï¿½Ò´ï¿½
 	 * .createTransition();
 	 * 
 	 */
@@ -119,7 +119,7 @@ public class Transition {
 		}
 		
 		/**
-		 * @return ÀÌ °´Ã¼¿¡ ´ã°ÜÁø Á¤º¸°¡ ´ã±ä transition instance
+		 * @return ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ transition instance
 		 */
 		public Transition createTransition() {
 			Transition t = new Transition(this.src, this.dst);
@@ -141,11 +141,11 @@ public class Transition {
 		double transitionX = transition.getX();
 		double transitionY = transition.getY();
 		
-		/* ´õ ³ÐÀº ¹üÀ§ÀÇ °ªÀ» ÇÒ´çÇÔ */
+		/* ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ */
 		x = x - transitionX > 0 ? transitionX : x; 
 		y = y - transitionX > 0 ? transitionY : y; 
 		
-		/* target Ãß°¡ */
+		/* target ï¿½ß°ï¿½ */
 		Iterator<String> transitionTarget = transition.getTargets();
 		while(transitionTarget.hasNext()) {
 			String target = transitionTarget.next();
@@ -168,11 +168,13 @@ public class Transition {
 	}
 	
 	/* (non-Javadoc)
-	 * TransitionÀÇ event°¡ °°Àº °æ¿ì °°Àº transitionÀ¸·Î Ãë±Þ 
+	 * Transitionï¿½ï¿½ eventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ transitionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	 */
 	@Override
 	public boolean equals(Object obj) {
 		Transition t = (Transition) obj;
-		return this.event.equals(t.event);
+		return event.equals(t.event) 
+				&& t.src.equals(src)
+				&& t.dst.equals(dst);
 	}
 }

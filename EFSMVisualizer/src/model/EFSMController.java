@@ -1,6 +1,5 @@
 package model;
 
-
 /**
  * @author se
  * EFSM �ٷ�� Ŭ����
@@ -12,9 +11,15 @@ public class EFSMController {
 	 * EFSM �� GK-tail�˰������� ���ս�Ų��.
 	 * @param src 
 	 * @param dst
+	 * @throws Exception 
 	 */
-	public static void merge(Automata src, Automata dst, int k) {
+	public static void merge(Automata src, Automata dst, int k) throws Exception {
 
+		if(src == null || dst == null) throw new Exception();
+		
+		Automata mergedAutomata = new Automata();
+		mergedAutomata.addStateSeq(src.startTransition());
+		
 		int range = minSize(src, dst);
 
 		if(range < 0) return;
@@ -24,7 +29,10 @@ public class EFSMController {
 				Transition srcTran = src.get(j);
 				Transition dstTran = dst.get(j);
 				
-				System.out.print(srcTran.toString() + dstTran.toString());
+				if(srcTran.equals(dstTran)) {
+					mergedAutomata.addStateSeq(srcTran);
+				}
+				
 			}
 		}
 	}
