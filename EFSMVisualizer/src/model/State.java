@@ -21,6 +21,11 @@ public class State {
 		State s = (State) obj;
 		return this.stateId == s.getStateId() ? true : false;
 	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(stateId);
+	}
 
 
 

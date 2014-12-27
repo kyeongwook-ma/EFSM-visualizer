@@ -158,6 +158,7 @@ public class Transition {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append( "\n" + src.toString() + " -> " + dst.toString() + "\n");
 		sb.append("x : " + x + "\n");
 		sb.append("y : " + y + "\n");
 		sb.append("event : " + event + "\n");
