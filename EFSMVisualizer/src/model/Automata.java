@@ -44,6 +44,7 @@ public class Automata {
 		
 		if(transitionSeqs.size() == 0) {
 			transitionSeqs.addAll(Arrays.asList(transitions));
+			return;
 		}
 			
 		for(Transition t : transitions) {
@@ -65,6 +66,13 @@ public class Automata {
 
 	public Transition endTransition() {
 		return transitionSeqs.getLast();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Automata automata = (Automata) obj;
+		
+		return super.equals(obj);
 	}
 	
 	@Override

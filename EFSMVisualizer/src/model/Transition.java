@@ -88,8 +88,10 @@ public class Transition {
 		private HashSet<String> targets;
 		
 		public TransitionBuilder(State src, State dst) {
+			
 			this.src = src;
 			this.dst = dst;
+					
 			targets = new HashSet<String>();
 		}
 		

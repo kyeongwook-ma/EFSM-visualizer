@@ -14,41 +14,7 @@ import org.junit.Test;
 
 public class TestAutomata {
 
-	@Test
-	public void testMerge() {
-		Automata srcAutomata = new Automata();
-		
-		for(int i = 0; i < 10; ++i) {
-			Transition t
-			= new Transition.TransitionBuilder(
-					State.newInstance(i), State.newInstance(i+1))
-			.x(10).y(30).event("onSlide" + String.valueOf(new Random().nextInt(10)))
-			.target("t1").timestamp(100)
-			.createTransition();
-			
-			srcAutomata.addStateSeq(t);
-		}
-		
-		Automata dstAutomata = new Automata();
-		
-		for(int i = 0; i < 4; ++i) {
-			Transition t
-			= new Transition.TransitionBuilder(State.newInstance(i),
-					State.newInstance(i+1))
-			.x(10).y(30).event("onSlide" + String.valueOf(new Random().nextInt(3)))
-			.target("t1").timestamp(100)
-			.createTransition();
-			
-			dstAutomata.addStateSeq(t);
-		}
-		
-		try {
-			EFSMController.merge(srcAutomata, dstAutomata, 2);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
-	}
+
 	
 	@Test
 	public void testAddEqualState() {

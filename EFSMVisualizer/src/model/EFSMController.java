@@ -18,19 +18,19 @@ public class EFSMController {
 		if(src == null || dst == null) throw new Exception();
 
 		Automata mergedAutomata = new Automata();
-		mergedAutomata.addStateSeq(src.startTransition());
 
-		int range = minSize(src, dst);
+		int range = minSize(src, dst) + 1;
 
-		if(range < 0) throw new IndexOutOfBoundsException();
+		if(range < 0 || k > range) throw new IndexOutOfBoundsException();
 
 		for(int i = 0; i < range - k; ++i) {			
-			for(int j = i; j < i + k; ++j) {
+			for(int j = i; j < i + k;  ++j) {
 				Transition srcTran = src.get(j);
 				Transition dstTran = dst.get(j);
 
-				if(srcTran.equals(dstTran))
+				if(srcTran.equals(dstTran)) {
 					mergedAutomata.addStateSeq(srcTran);
+				}
 			}
 		}
 
