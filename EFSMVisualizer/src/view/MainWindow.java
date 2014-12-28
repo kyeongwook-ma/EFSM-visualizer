@@ -14,6 +14,11 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.Automata;
+import model.State;
+import model.Transition;
+import java.awt.GridLayout;
+
 public class MainWindow {
 
 	private JFrame frame;
@@ -86,15 +91,33 @@ public class MainWindow {
 		
 		JPanel mergedPane = new JPanel();
 
-		ImageCasher.getImage("arrow.png");
 		
 		JPanel userPane = new JPanel();
-		userPane.setBackground(Color.WHITE);
+		userPane.setLayout(new GridLayout(0, 1, 0, 0));
+		userPane.add(new EFSMView(getMergedAutomata()));
 		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 		
 		
+	}
+	
+	private Automata getMergedAutomata() {
+
+		Automata mergedAutomata = new Automata();
+
+		Transition t2 = 
+				new Transition.TransitionBuilder(State.newInstance(2), State.newInstance(3))
+		.x(30).y(40).event("onTouch").timestamp(100).target("더보기")
+		.createTransition();
+
+		Transition t3 = 
+				new Transition.TransitionBuilder(State.newInstance(3), State.newInstance(4))
+		.x(30).y(40).event("onTouch").timestamp(300).target("이벤트")
+		.createTransition();
+
+		mergedAutomata.addStateSeq(t2,t3);	
+		return mergedAutomata;
 	}
 
 }
