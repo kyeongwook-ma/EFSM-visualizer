@@ -161,11 +161,11 @@ public class Transition {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( "\n" + src.toString() + " -> " + dst.toString() + "\n");
-		sb.append("x : " + x + "\n");
-		sb.append("y : " + y + "\n");
-		sb.append("event : " + event + "\n");
-		sb.append("target : " + targets.toString() + "\n");
-		sb.append("timestamp : " + String.valueOf(timestamp) + "\n");
+		sb.append("x : " + x + " ,");
+		sb.append("y : " + y + " ,");
+		sb.append("event : " + event + " ,");
+		sb.append("target : " + targets.toString() + " ,");
+		sb.append("timestamp : " + String.valueOf(timestamp));
 	
 		return sb.toString();
 	}

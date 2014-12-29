@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -20,6 +21,8 @@ import model.State;
 import model.Transition;
 import model.db.DBHelper;
 import model.db.UserLogGetter;
+
+import javax.swing.JScrollPane;
 
 public class MainWindow {
 
@@ -77,6 +80,10 @@ public class MainWindow {
 		}
 		
 		logArea.setText(sb.toString());		
+		
+		JScrollPane scrollPane = new JScrollPane(logArea);
+		scrollPane.setPreferredSize(new Dimension(500,200));	
+		frame.getContentPane().add(scrollPane, BorderLayout.SOUTH);
 		
 		JPanel optionPane = new JPanel();
 		frame.getContentPane().add(optionPane, BorderLayout.NORTH);
