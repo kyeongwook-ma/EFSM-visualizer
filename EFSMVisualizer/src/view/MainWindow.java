@@ -1,11 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +18,8 @@ import javax.swing.JTextField;
 import model.Automata;
 import model.State;
 import model.Transition;
-import java.awt.GridLayout;
+import model.db.DBHelper;
+import model.db.UserLogGetter;
 
 public class MainWindow {
 
@@ -63,9 +65,19 @@ public class MainWindow {
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
 		logArea.setColumns(8);
-		logArea.setEditable(false);
+		logArea.setEditable(false); 
 		panel.add(logArea);
+		
+		List<Transition> transitions = 
+				DBHelper.getInstance().<Transition>getAllStmt(new UserLogGetter());
 
+		StringBuilder sb = new StringBuilder();
+		for(Transition t : transitions) {
+			sb.append(t.toString());
+		}
+		
+		logArea.setText(sb.toString());		
+		
 		JPanel optionPane = new JPanel();
 		frame.getContentPane().add(optionPane, BorderLayout.NORTH);
 

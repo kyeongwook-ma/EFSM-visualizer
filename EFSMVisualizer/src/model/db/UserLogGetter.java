@@ -9,17 +9,17 @@ import model.State;
 import model.Transition;
 
 public class UserLogGetter implements IAllRowGetter{
-
+	
 	@Override
-	public <T> List<T> getObject(ResultSet rs) {
+	public <T> T getObject(ResultSet rs) {
 		
-		ArrayList<T> objList = new ArrayList<T>();
+		Transition transition = null;
 		
 		int currState;
 		
 		try {
 			currState = rs.getInt(BMDscheme.COLUMN_ID);
-			Transition transition = 
+			transition = 
 					new Transition.TransitionBuilder(
 							State.newInstance(currState), State.newInstance(currState+1))
 			.x(rs.getDouble(BMDscheme.COLUMN_Y)).y(rs.getDouble(BMDscheme.COLUMN_X))
@@ -27,15 +27,19 @@ public class UserLogGetter implements IAllRowGetter{
 			.timestamp(rs.getDouble(BMDscheme.COLUMN_TIMESTAMP))
 			.event(rs.getString(BMDscheme.COLUMN_MODE))
 			.createTransition();
-					
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
-		return objList;
+		return (T) transition;
 	
+	}
+
+	@Override
+	public String getSql() {
+		return " SELECT * FROM " + BMDscheme.TABLE_NAME + ";";
 	}
 
 }

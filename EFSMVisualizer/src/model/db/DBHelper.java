@@ -8,11 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Transition;
+
 public class DBHelper {
 
 	private Connection c;
-
-	public DBHelper(String dbName) {
+	private static final String dbName = "BadUIDB";
+	private static DBHelper instance = new DBHelper();
+	
+	private DBHelper() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
@@ -24,19 +28,26 @@ public class DBHelper {
 			e.printStackTrace();
 		}
 	}
+	
+	public static DBHelper getInstance() {
+		if(instance == null)
+			return new DBHelper();
+		else
+			return instance;
+	}
 
-	public <T> List<T> getAllStmt(String statement, IAllRowGetter getter) {
+	public <T> List<T> getAllStmt(IAllRowGetter getter) {
 		
 		assert c != null;
-		ArrayList<T> rows = new ArrayList<T>();
+		List<T> rows = new ArrayList<T>();
 		Statement stmt = null;
 		
 		try {
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery(statement);
+			ResultSet rs = stmt.executeQuery(getter.getSql());
 						
 			while(rs.next()) {
-				rows.add((T) getter.getObject(rs));
+				rows.add((T) getter.<Transition>getObject(rs));
 			}
 			
 			rs.close();
@@ -45,7 +56,7 @@ public class DBHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return rows;
+		return (List<T>)rows;
 	}
 
 
