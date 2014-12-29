@@ -1,12 +1,10 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
-import java.util.Random;
 
 import model.Automata;
-import model.EFSMController;
 import model.State;
 import model.Transition;
 

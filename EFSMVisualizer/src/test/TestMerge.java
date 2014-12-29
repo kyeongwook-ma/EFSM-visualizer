@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import model.Automata;
-import model.EFSMController;
+import model.EFSMUtil;
 import model.State;
 import model.Transition;
 
@@ -18,7 +18,7 @@ public class TestMerge {
 		Automata mergedAutomata;
 
 		try {
-			mergedAutomata = EFSMController.merge(srcAutomata, dstAutomata, 2);
+			mergedAutomata = EFSMUtil.merge(srcAutomata, dstAutomata, 2);
 			assertEquals(true, mergedAutomata.equals(getMergedAutomata()));
 			
 		} catch (Exception e) {		

@@ -5,7 +5,7 @@ package model;
  * EFSM �ٷ�� Ŭ����
  * K �� GK-tail�� �����
  */
-public class EFSMController {
+public class EFSMUtil {
 
 	/**
 	 * EFSM �� GK-tail�˰������� ���ս�Ų��.

@@ -100,6 +100,7 @@ public class MainWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				int k = Integer.valueOf(textField.getText());
 				
 			}
 		});
@@ -109,11 +110,11 @@ public class MainWindow {
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		JPanel mergedPane = new JPanel();
-
+		mergedPane.add(new EFSMView(getMergedAutomata()));
+		
 		
 		JPanel userPane = new JPanel();
 		userPane.setLayout(new GridLayout(0, 1, 0, 0));
-		userPane.add(new EFSMView(getMergedAutomata()));
 		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
