@@ -16,7 +16,9 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import model.Automata;
+import model.EFSM;
+import model.EFSMStorage;
+import model.EFSMUtil;
 import model.State;
 import model.Transition;
 import model.db.DBHelper;
@@ -64,27 +66,26 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
-		
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
 		logArea.setColumns(8);
 		logArea.setEditable(false); 
 		panel.add(logArea);
-		
+
 		List<Transition> transitions = 
-				DBHelper.getInstance().<Transition>getAllStmt(new UserLogGetter());
+				DBHelper.getInstance().constructModel(new UserLogGetter());
 
 		StringBuilder sb = new StringBuilder();
 		for(Transition t : transitions) {
 			sb.append(t.toString());
 		}
-		
+
 		logArea.setText(sb.toString());		
-		
+
 		JScrollPane scrollPane = new JScrollPane(logArea);
 		scrollPane.setPreferredSize(new Dimension(500,200));	
 		frame.getContentPane().add(scrollPane, BorderLayout.SOUTH);
-		
+
 		JPanel optionPane = new JPanel();
 		frame.getContentPane().add(optionPane, BorderLayout.NORTH);
 
@@ -96,35 +97,45 @@ public class MainWindow {
 		JButton btnMerge = new JButton("Merge");
 		optionPane.add(btnMerge);
 		btnMerge.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int k = Integer.valueOf(textField.getText());
-				
+				merge(k);	
 			}
 		});
-		
-		
+
+
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
-		
+
 		JPanel mergedPane = new JPanel();
 		mergedPane.add(new EFSMView(getMergedAutomata()));
-		
-		
+
 		JPanel userPane = new JPanel();
 		userPane.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
-		
-		
 	}
 	
-	private Automata getMergedAutomata() {
+	private void merge(int k) {
+		List<EFSM> automatas = EFSMStorage.getInstance().getAllAutomatas();
+		
+		EFSM firstEFSM = automatas.get(0);
+		for(int i = 1; i < automatas.size(); ++i) {
+			EFSM targetEFSM = automatas.get(i);
+			try {
+				firstEFSM = EFSMUtil.merge(firstEFSM, targetEFSM, k);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
-		Automata mergedAutomata = new Automata();
+	private EFSM getMergedAutomata() {
+
+		EFSM mergedAutomata = new EFSM();
 
 		Transition t2 = 
 				new Transition.TransitionBuilder(State.newInstance(2), State.newInstance(3))

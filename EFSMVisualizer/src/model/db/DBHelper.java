@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.EFSM;
+import model.EFSMStorage;
 import model.Transition;
 
 public class DBHelper {
@@ -36,10 +38,10 @@ public class DBHelper {
 			return instance;
 	}
 
-	public <T> List<T> getAllStmt(IAllRowGetter getter) {
+	public List<Transition> constructModel(IAllRowGetter getter) {
 		
 		assert c != null;
-		List<T> rows = new ArrayList<T>();
+		List<Transition> rows = new ArrayList<Transition>();
 		Statement stmt = null;
 		
 		try {
@@ -47,7 +49,7 @@ public class DBHelper {
 			ResultSet rs = stmt.executeQuery(getter.getSql());
 						
 			while(rs.next()) {
-				rows.add((T) getter.<Transition>getObject(rs));
+				rows.add(getter.getTransition(rs));
 			}
 			
 			rs.close();
@@ -56,7 +58,11 @@ public class DBHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return (List<T>)rows;
+		
+		EFSM automata = new EFSM();
+		automata.addStateSeq(rows);
+		EFSMStorage.getInstance().addAutomata(automata);
+		return rows;
 	}
 
 

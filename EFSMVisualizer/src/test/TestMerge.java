@@ -1,7 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import model.Automata;
+import model.EFSM;
 import model.EFSMUtil;
 import model.State;
 import model.Transition;
@@ -12,10 +12,10 @@ public class TestMerge {
 	@Test
 	public void testMergeWithGKTail() {
 
-		Automata dstAutomata = getDstAutomata();
-		Automata srcAutomata = getSrcAutomata();
+		EFSM dstAutomata = getDstAutomata();
+		EFSM srcAutomata = getSrcAutomata();
 
-		Automata mergedAutomata;
+		EFSM mergedAutomata;
 
 		try {
 			mergedAutomata = EFSMUtil.merge(srcAutomata, dstAutomata, 2);
@@ -26,9 +26,9 @@ public class TestMerge {
 		}
 	}
 
-	private Automata getMergedAutomata() {
+	private EFSM getMergedAutomata() {
 
-		Automata mergedAutomata = new Automata();
+		EFSM mergedAutomata = new EFSM();
 
 		Transition t2 = 
 				new Transition.TransitionBuilder(State.newInstance(2), State.newInstance(3))
@@ -44,9 +44,9 @@ public class TestMerge {
 		return mergedAutomata;
 	}
 
-	private Automata getSrcAutomata() {
+	private EFSM getSrcAutomata() {
 
-		Automata srcAutomata = new Automata();
+		EFSM srcAutomata = new EFSM();
 
 		Transition t1 = 
 				new Transition.TransitionBuilder(State.newInstance(1), State.newInstance(2))
@@ -68,9 +68,9 @@ public class TestMerge {
 		return srcAutomata;
 	}
 
-	private Automata getDstAutomata() {
+	private EFSM getDstAutomata() {
 
-		Automata dstAutomata = new Automata();
+		EFSM dstAutomata = new EFSM();
 
 		Transition t1 = 
 				new Transition.TransitionBuilder(State.newInstance(1), State.newInstance(2))

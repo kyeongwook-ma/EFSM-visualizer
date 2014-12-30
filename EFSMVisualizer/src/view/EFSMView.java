@@ -8,15 +8,15 @@ import java.util.TreeSet;
 
 import javax.swing.JPanel;
 
-import model.Automata;
+import model.EFSM;
 import model.Transition;
 
 public class EFSMView extends JPanel {
 
-	private Automata automata;
+	private EFSM automata;
 	private Image arrowImg = ImageCasher.getImage("arrow.png");
 
-	public EFSMView(Automata automata) {
+	public EFSMView(EFSM automata) {
 		this.automata = automata;
 
 		Iterator<Integer> stateSeq = getStateSeq();

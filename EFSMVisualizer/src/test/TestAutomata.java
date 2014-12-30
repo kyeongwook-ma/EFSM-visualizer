@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
 
-import model.Automata;
+import model.EFSM;
 import model.State;
 import model.Transition;
 
@@ -16,7 +16,7 @@ public class TestAutomata {
 	
 	@Test
 	public void testAddEqualState() {
-		Automata automata = new Automata();
+		EFSM automata = new EFSM();
 		
 		final double expectedX = 30;
 		final double expectedY = 70;

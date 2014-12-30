@@ -13,11 +13,11 @@ public class EFSMUtil {
 	 * @param dst
 	 * @throws Exception 
 	 */
-	public static Automata merge(Automata src, Automata dst, int k) throws Exception {
+	public static EFSM merge(EFSM src, EFSM dst, int k) throws Exception {
 
 		if(src == null || dst == null) throw new Exception();
 
-		Automata mergedAutomata = new Automata();
+		EFSM mergedEFSM = new EFSM();
 
 		int range = minSize(src, dst) + 1;
 
@@ -29,15 +29,15 @@ public class EFSMUtil {
 				Transition dstTran = dst.get(j);
 
 				if(srcTran.equals(dstTran)) {
-					mergedAutomata.addStateSeq(srcTran);
+					mergedEFSM.addStateSeq(srcTran);
 				}
 			}
 		}
 
-		return mergedAutomata;
+		return mergedEFSM;
 	}
 
-	private static int minSize(Automata src, Automata dst) {
+	private static int minSize(EFSM src, EFSM dst) {
 		return src.size() > dst.size() ? dst.size() : src.size();
 	}
 

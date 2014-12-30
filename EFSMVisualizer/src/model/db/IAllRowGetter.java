@@ -1,9 +1,10 @@
 package model.db;
 
 import java.sql.ResultSet;
-import java.util.List;
+
+import model.Transition;
 
 public interface IAllRowGetter {
-	<T> T getObject(ResultSet rs);
+	Transition getTransition(ResultSet rs);
 	String getSql();
 }

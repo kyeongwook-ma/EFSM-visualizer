@@ -1,14 +1,15 @@
 package model;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Automata {
+public class EFSM {
 
 	private LinkedList<Transition> transitionSeqs;
 
-	public Automata() {
+	public EFSM() {
 		transitionSeqs = new LinkedList<Transition>();
 	}
 	
@@ -40,6 +41,24 @@ public class Automata {
 		return false;
 	}
 
+	public void addStateSeq(List<Transition> transitions) {
+		if(transitionSeqs.size() == 0) {
+			transitionSeqs.addAll((Collection<? extends Transition>) Arrays.asList(transitions));
+			return;
+		}
+			
+		for(Transition t : transitions) {
+			/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
+			Transition lastTransition = endTransition();
+			
+			if(lastTransition.equals(t)) {
+				lastTransition.expend(t);			
+			} else {
+				transitionSeqs.add(t);
+			}
+		}
+	}
+	
 	public void addStateSeq(Transition... transitions) {
 		
 		if(transitionSeqs.size() == 0) {
@@ -70,7 +89,7 @@ public class Automata {
 	
 	@Override
 	public boolean equals(Object obj) {
-		Automata automata = (Automata) obj;
+		EFSM automata = (EFSM) obj;
 		
 		return super.equals(obj);
 	}
