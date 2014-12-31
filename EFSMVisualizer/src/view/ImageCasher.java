@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class ImageCasher {
 
-	private static final String absPath = "./res";
+	private static final String absPath = ".\\res";
 	private static HashMap<String, Image> imageMap;
 
 	static {
@@ -42,7 +42,7 @@ public class ImageCasher {
 	}
 
 	public static Image getImage(String fileName) {
-		Image img = imageMap.get(absPath + "/" + fileName);
+		Image img = imageMap.get(absPath + "\\" + fileName);
 		assert img != null;
 		return img;
 	}

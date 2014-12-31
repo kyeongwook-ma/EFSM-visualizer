@@ -41,24 +41,6 @@ public class EFSM {
 		return false;
 	}
 
-	public void addStateSeq(List<Transition> transitions) {
-		if(transitionSeqs.size() == 0) {
-			transitionSeqs.addAll((Collection<? extends Transition>) Arrays.asList(transitions));
-			return;
-		}
-			
-		for(Transition t : transitions) {
-			/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
-			Transition lastTransition = endTransition();
-			
-			if(lastTransition.equals(t)) {
-				lastTransition.expend(t);			
-			} else {
-				transitionSeqs.add(t);
-			}
-		}
-	}
-	
 	public void addStateSeq(Transition... transitions) {
 		
 		if(transitionSeqs.size() == 0) {

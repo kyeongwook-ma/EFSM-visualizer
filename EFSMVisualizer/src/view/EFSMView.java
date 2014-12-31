@@ -23,7 +23,7 @@ public class EFSMView extends JPanel {
 
 		while(stateSeq.hasNext()) {
 			Integer stateId = stateSeq.next();
-			add(new StateView(stateId.intValue()));
+		//	add(new StateView(stateId.intValue()));
 		}
 	}
 
@@ -44,7 +44,7 @@ public class EFSMView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(arrowImg, 10, 10, null);
+		g.drawImage(arrowImg, 0, 0, null);
 		repaint();
 	}
 
