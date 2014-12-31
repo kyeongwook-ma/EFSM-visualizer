@@ -76,7 +76,7 @@ public class MainWindow {
 
 		DBHelper.getInstance().constructModel(new UserLogGetter());
 		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
-		
+
 		StringBuilder sb = new StringBuilder();
 		for(User user : users) {
 			System.out.println(user.toString());
@@ -96,17 +96,6 @@ public class MainWindow {
 		optionPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		optionPane.add(textField);
 
-		JButton btnMerge = new JButton("Merge");
-		optionPane.add(btnMerge);
-		btnMerge.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int k = Integer.valueOf(textField.getText());
-				merge(k);	
-			}
-		});
-
-
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 
@@ -118,23 +107,39 @@ public class MainWindow {
 
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
+		
+		JButton btnMerge = new JButton("Merge");
+		optionPane.add(btnMerge);
+		btnMerge.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int k = Integer.valueOf(textField.getText());
+				EFSM mergedEFSM = merge(k);
+				EFSMView mergedView = generateView(mergedEFSM);
+				mergedPane.add(mergedView);
+			}
+		});
+
+
 	}
 
-	private void merge(int k) {
-		List<EFSM> automatas = EFSMStorage.getInstance().getAllEFSMs();
+	private EFSMView generateView(EFSM efsm) {
+		return new EFSMView(efsm);
+	}
+	
+	private EFSM merge(int k) {
+		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
 
-		EFSM firstEFSM = automatas.get(0);
-		for(int i = 1; i < automatas.size(); ++i) {
-			EFSM targetEFSM = automatas.get(i);
+		EFSM firstEFSM = users.get(0).getBehaviorModel();
+
+		for(User user : users) {
 			try {
-				firstEFSM = EFSMUtil.merge(firstEFSM, targetEFSM, k);
-
-				System.out.println(firstEFSM.toString());
+				firstEFSM = EFSMUtil.merge(firstEFSM, user.getBehaviorModel(), k);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}	
 		}
-
+		return firstEFSM;
 	}
 
 	private EFSM getMergedAutomata() {
