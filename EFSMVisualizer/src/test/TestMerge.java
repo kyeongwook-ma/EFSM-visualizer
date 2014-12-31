@@ -10,22 +10,6 @@ import org.junit.Test;
 public class TestMerge {
 
 	@Test
-	public void testMergeWithGKTail() {
-
-		EFSM dstAutomata = getDstAutomata();
-		EFSM srcAutomata = getSrcAutomata();
-
-		EFSM mergedAutomata;
-
-		try {
-			mergedAutomata = EFSMUtil.merge(srcAutomata, dstAutomata, 2);
-			assertEquals(true, mergedAutomata.equals(getMergedAutomata()));
-			
-		} catch (Exception e) {		
-			e.printStackTrace();
-		}
-	}
-
 	private EFSM getMergedAutomata() {
 
 		EFSM mergedAutomata = new EFSM();

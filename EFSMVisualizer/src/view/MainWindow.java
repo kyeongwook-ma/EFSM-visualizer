@@ -93,7 +93,7 @@ public class MainWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int k = Integer.valueOf(textField.getText());
-				EFSM mergedEFSM = merge(k);
+				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
 				EFSMView mergedView = generateView(mergedEFSM);
 				mergedPane.add(mergedView);
 				mergedPane.revalidate();
@@ -132,6 +132,7 @@ public class MainWindow {
 		userPane.setPreferredSize(new Dimension(400,400));
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
 		userPane.add(instUser);
+		userPane.add(new ArrowView());
 		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
@@ -144,20 +145,6 @@ public class MainWindow {
 		return new EFSMView(efsm);
 	}
 	
-	private EFSM merge(int k) {
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
-
-		EFSM firstEFSM = users.get(0).getBehaviorModel();
-
-		for(User user : users) {
-			try {
-				firstEFSM = EFSMUtil.merge(firstEFSM, user.getBehaviorModel(), k);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
-		}
-		return firstEFSM;
-	}
 
 	private EFSM getMergedAutomata() {
 

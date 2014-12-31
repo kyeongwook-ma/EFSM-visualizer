@@ -16,7 +16,9 @@ public class ArrowView extends JComponent {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(img, 0, 0, this);
+		assert img != null;
+		g.drawImage(img, 10, 10, 100,100,null);
+		repaint();
 	}
 	
 }

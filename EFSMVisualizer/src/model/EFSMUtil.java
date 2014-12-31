@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * @author se
  * EFSM �ٷ�� Ŭ����
@@ -13,7 +15,7 @@ public class EFSMUtil {
 	 * @param dst
 	 * @throws Exception 
 	 */
-	public static EFSM merge(EFSM src, EFSM dst, int k) throws Exception {
+	private static EFSM merge(EFSM src, EFSM dst, int k) throws Exception {
 
 		if(src == null || dst == null) throw new Exception();
 
@@ -35,6 +37,22 @@ public class EFSMUtil {
 		}
 
 		return mergedEFSM;
+	}
+	
+
+	public static EFSM getMergedModel(int k) {
+		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+
+		EFSM firstEFSM = users.get(0).getBehaviorModel();
+
+		for(User user : users) {
+			try {
+				firstEFSM = merge(firstEFSM, user.getBehaviorModel(), k);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		return firstEFSM;
 	}
 
 	private static int minSize(EFSM src, EFSM dst) {
