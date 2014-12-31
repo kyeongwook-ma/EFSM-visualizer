@@ -11,8 +11,6 @@ import model.Transition;
 import org.junit.Test;
 
 public class TestAutomata {
-
-
 	
 	@Test
 	public void testAddEqualState() {

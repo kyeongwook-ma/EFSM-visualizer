@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -21,10 +22,10 @@ import model.EFSMStorage;
 import model.EFSMUtil;
 import model.State;
 import model.Transition;
+import model.User;
+import model.UserBehaviorModels;
 import model.db.DBHelper;
 import model.db.UserLogGetter;
-
-import javax.swing.JScrollPane;
 
 public class MainWindow {
 
@@ -72,12 +73,13 @@ public class MainWindow {
 		logArea.setEditable(false); 
 		panel.add(logArea);
 
-		List<Transition> transitions = 
-				DBHelper.getInstance().constructModel(new UserLogGetter());
 
+		DBHelper.getInstance().constructModel(new UserLogGetter());
+		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+		
 		StringBuilder sb = new StringBuilder();
-		for(Transition t : transitions) {
-			sb.append(t.toString());
+		for(User user : users) {
+			System.out.println(user.toString());
 		}
 
 		logArea.setText(sb.toString());		
@@ -117,20 +119,22 @@ public class MainWindow {
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 	}
-	
+
 	private void merge(int k) {
-		List<EFSM> automatas = EFSMStorage.getInstance().getAllAutomatas();
-		
+		List<EFSM> automatas = EFSMStorage.getInstance().getAllEFSMs();
+
 		EFSM firstEFSM = automatas.get(0);
 		for(int i = 1; i < automatas.size(); ++i) {
 			EFSM targetEFSM = automatas.get(i);
 			try {
 				firstEFSM = EFSMUtil.merge(firstEFSM, targetEFSM, k);
+
+				System.out.println(firstEFSM.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	private EFSM getMergedAutomata() {

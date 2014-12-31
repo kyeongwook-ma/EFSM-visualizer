@@ -89,7 +89,7 @@ public class EFSM {
 	
 	@Override
 	public boolean equals(Object obj) {
-		EFSM automata = (EFSM) obj;
+		EFSM efsm = (EFSM) obj;
 		
 		return super.equals(obj);
 	}

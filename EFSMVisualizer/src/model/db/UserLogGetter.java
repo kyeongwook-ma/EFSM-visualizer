@@ -2,8 +2,6 @@ package model.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.State;
 import model.Transition;
@@ -16,6 +14,8 @@ public class UserLogGetter implements IAllRowGetter{
 		return " SELECT * FROM " + BMDscheme.TABLE_NAME + ";";
 	}
 
+	
+	
 	@Override
 	public Transition getTransition(ResultSet rs) {
 		Transition transition = null;
