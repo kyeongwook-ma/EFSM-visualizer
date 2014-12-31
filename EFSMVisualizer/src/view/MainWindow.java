@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -101,10 +102,12 @@ public class MainWindow {
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 
 		JPanel mergedPane = new JPanel();
+		mergedPane.setLayout(new BoxLayout(mergedPane, BoxLayout.Y_AXIS));
 		JLabel instMerge = new JLabel("Merged user behavior model");
 		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 30));
 		mergedPane.add(instMerge);
-		
+		mergedPane.add(new EFSMView(getMergedAutomata()));
+
 		JPanel userPane = new JPanel();
 		userPane.setPreferredSize(new Dimension(400,400));
 		JLabel instUser = new JLabel("User behavior model");

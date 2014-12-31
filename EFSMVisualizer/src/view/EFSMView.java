@@ -44,7 +44,8 @@ public class EFSMView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(arrowImg, 0, 0,30, 30, this);
+		g.drawImage(arrowImg, 10, 10, null);
+		repaint();
 	}
 
 }
