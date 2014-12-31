@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -18,7 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.EFSM;
-import model.EFSMStorage;
 import model.EFSMUtil;
 import model.State;
 import model.Transition;
@@ -100,11 +101,16 @@ public class MainWindow {
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 
 		JPanel mergedPane = new JPanel();
-		mergedPane.add(new EFSMView(getMergedAutomata()));
-
+		JLabel instMerge = new JLabel("Merged user behavior model");
+		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 30));
+		mergedPane.add(instMerge);
+		
 		JPanel userPane = new JPanel();
-		userPane.setLayout(new GridLayout(0, 1, 0, 0));
-
+		userPane.setPreferredSize(new Dimension(400,400));
+		JLabel instUser = new JLabel("User behavior model");
+		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
+		userPane.add(instUser);
+		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 		
@@ -117,6 +123,7 @@ public class MainWindow {
 				EFSM mergedEFSM = merge(k);
 				EFSMView mergedView = generateView(mergedEFSM);
 				mergedPane.add(mergedView);
+				mergedPane.revalidate();
 			}
 		});
 

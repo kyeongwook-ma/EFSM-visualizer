@@ -23,7 +23,7 @@ public class EFSMView extends JPanel {
 
 		while(stateSeq.hasNext()) {
 			Integer stateId = stateSeq.next();
-		//	add(new StateView(stateId.intValue()));
+			add(new StateView(stateId.intValue()));
 		}
 	}
 
