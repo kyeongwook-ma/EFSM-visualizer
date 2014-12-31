@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -82,8 +84,9 @@ public class MainWindow {
 		logArea.setRows(8);
 		logArea.setColumns(8);
 		logArea.setEditable(false); 
-		panel.add(logArea);
 		logArea.setText(sb.toString());		
+
+		panel.add(logArea);
 
 	}
 	
@@ -132,13 +135,25 @@ public class MainWindow {
 		userPane.setPreferredSize(new Dimension(400,400));
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
 		userPane.add(instUser);
-		userPane.add(new ArrowView());
-		
+			
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 		
 		addLogArea();
 		addMergeOperation();
+		drawUserEFSM();
+	}
+	
+	private void drawUserEFSM() {
+		
+		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+		
+		
+		for(User user : users) {
+			EFSM behaviorModel = user.getBehaviorModel();	
+			userPane.add(new EFSMView(behaviorModel));
+		}
+		
 	}
 
 	private EFSMView generateView(EFSM efsm) {

@@ -1,11 +1,13 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import model.EFSM;
@@ -18,9 +20,9 @@ public class EFSMView extends JPanel {
 
 	public EFSMView(EFSM automata) {
 		this.automata = automata;
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		Iterator<Integer> stateSeq = getStateSeq();
-
 		while(stateSeq.hasNext()) {
 			Integer stateId = stateSeq.next();
 			add(new StateView(stateId.intValue()));
