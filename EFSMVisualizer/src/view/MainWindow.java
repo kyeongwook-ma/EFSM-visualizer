@@ -1,17 +1,14 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -79,14 +76,16 @@ public class MainWindow {
 
 		StringBuilder sb = new StringBuilder();
 		for(User user : users) {
+			sb.append(user.toString());
 			System.out.println(user.toString());
 		}
 		logArea.setRows(8);
-		logArea.setColumns(8);
+		logArea.setColumns(30);
 		logArea.setEditable(false); 
 		logArea.setText(sb.toString());		
 
 		panel.add(logArea);
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
 	}
 	
@@ -113,8 +112,6 @@ public class MainWindow {
 		frame.setBounds(100, 100, 891, 787);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 
 		scrollPane.setPreferredSize(new Dimension(500,200));	
 		frame.getContentPane().add(scrollPane, BorderLayout.SOUTH);
