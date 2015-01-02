@@ -1,5 +1,4 @@
 package view;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -9,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,26 +27,12 @@ import model.db.DBHelper;
 import model.db.UserLogGetter;
 
 public class MainWindow {
-
 	private JFrame frame;
 	private JTextField textField;
-	JPanel panel = new JPanel();
-
-	JTextArea logArea = new JTextArea();
-	JButton btnMerge = new JButton("Merge");
-	JLabel instUser = new JLabel("User behavior model");
-	JPanel userPane = new JPanel();
-	JLabel instMerge = new JLabel("Merged user behavior model");
-	final JPanel mergedPane = new JPanel();
-	JSplitPane splitPane = new JSplitPane();
-	JPanel optionPane = new JPanel();
-	JScrollPane scrollPane = new JScrollPane(logArea);
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -60,50 +44,12 @@ public class MainWindow {
 			}
 		});
 	}
-	
-	
 	/**
 	 * Create the application.
 	 */
 	public MainWindow() {
 		initialize();
 	}
-
-	private void addLogArea() {
-		
-		DBHelper.getInstance().constructModel(new UserLogGetter());
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
-
-		StringBuilder sb = new StringBuilder();
-		for(User user : users) {
-			sb.append(user.toString());
-			System.out.println(user.toString());
-		}
-		logArea.setRows(8);
-		logArea.setColumns(30);
-		logArea.setEditable(false); 
-		logArea.setText(sb.toString());		
-
-		panel.add(logArea);
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
-
-	}
-	
-	private void addMergeOperation() {
-		optionPane.add(btnMerge);
-		btnMerge.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int k = Integer.valueOf(textField.getText());
-				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
-				EFSMView mergedView = generateView(mergedEFSM);
-				mergedPane.add(mergedView);
-				mergedPane.revalidate();
-			}
-		});
-
-	}
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -112,68 +58,96 @@ public class MainWindow {
 		frame.setBounds(100, 100, 891, 787);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-
-		scrollPane.setPreferredSize(new Dimension(500,200));	
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		/* log view */
+		JTextArea logArea = new JTextArea();
+		logArea.setRows(8);
+		logArea.setColumns(8);
+		logArea.setEditable(false);
+		panel.add(logArea);
+		DBHelper.getInstance().constructModel(new UserLogGetter());
+		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
+		StringBuilder sb = new StringBuilder();
+		for(User user : userLogs) {
+			sb.append(user.toString());
+			System.out.println(user.toString());
+		}
+		logArea.setText(sb.toString());
+		JScrollPane scrollPane = new JScrollPane(logArea);
+		scrollPane.setPreferredSize(new Dimension(500,200));
 		frame.getContentPane().add(scrollPane, BorderLayout.SOUTH);
-		frame.getContentPane().add(optionPane, BorderLayout.NORTH);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		optionPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		optionPane.add(textField);
-
+		/* merge view */
+		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
-
-		mergedPane.setLayout(new BoxLayout(mergedPane, BoxLayout.Y_AXIS));
+		JPanel mergedPane = new JPanel();
+		JLabel instMerge = new JLabel("Merged user behavior model");
 		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 30));
 		mergedPane.add(instMerge);
-		mergedPane.add(new EFSMView(getMergedAutomata()));
 
-		userPane.setPreferredSize(new Dimension(400,400));
+		/* user behavior model view */
+		JPanel userPane = new JPanel();
+		userPane.setPreferredSize(new Dimension(400,400));		
+		JLabel instUser = new JLabel("User behavior model");
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
 		userPane.add(instUser);
-			
-		splitPane.setLeftComponent(userPane);
-		splitPane.setRightComponent(mergedPane);
-		
-		addLogArea();
-		addMergeOperation();
-		drawUserEFSM();
-	}
-	
-	private void drawUserEFSM() {
-		
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
-		
-		
-		for(User user : users) {
-			EFSM behaviorModel = user.getBehaviorModel();	
+		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
+		for(User user : userViews) {
+			EFSM behaviorModel = user.getBehaviorModel();
 			userPane.add(new EFSMView(behaviorModel));
 		}
-		
-	}
 
+		splitPane.setLeftComponent(userPane);
+		splitPane.setRightComponent(mergedPane);
+
+		/* merge menu */
+		JPanel mergeMenuPane = new JPanel();
+		frame.getContentPane().add(mergeMenuPane, BorderLayout.NORTH);
+		textField = new JTextField();
+		textField.setColumns(10);
+		mergeMenuPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		mergeMenuPane.add(textField);
+		JButton btnMerge = new JButton("Merge");
+		mergeMenuPane.add(btnMerge);
+		btnMerge.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int k = Integer.valueOf(textField.getText());
+				EFSM mergedEFSM = merge(k);
+				EFSMView mergedView = generateView(mergedEFSM);
+				mergedPane.add(mergedView);
+				mergedPane.revalidate();
+			}
+		});
+	}
 	private EFSMView generateView(EFSM efsm) {
 		return new EFSMView(efsm);
 	}
-	
-
+	private EFSM merge(int k) {
+		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+		EFSM firstEFSM = users.get(0).getBehaviorModel();
+		for(User user : users) {
+			try {
+				firstEFSM = EFSMUtil.getMergedModel(k);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return firstEFSM;
+	}
 	private EFSM getMergedAutomata() {
-
 		EFSM mergedAutomata = new EFSM();
-
-		Transition t2 = 
+		Transition t2 =
 				new Transition.TransitionBuilder(State.newInstance(2), State.newInstance(3))
 		.x(30).y(40).event("onTouch").timestamp(100).target("더보기")
 		.createTransition();
-
-		Transition t3 = 
+		Transition t3 =
 				new Transition.TransitionBuilder(State.newInstance(3), State.newInstance(4))
 		.x(30).y(40).event("onTouch").timestamp(300).target("이벤트")
 		.createTransition();
-
-		mergedAutomata.addStateSeq(t2,t3);	
+		mergedAutomata.addStateSeq(t2,t3);
 		return mergedAutomata;
 	}
-
 }
