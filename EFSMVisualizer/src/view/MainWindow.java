@@ -64,7 +64,7 @@ public class MainWindow {
 		/* log view */
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
-		logArea.setColumns(8);
+		logArea.setColumns(200);
 		logArea.setEditable(false);
 		panel.add(logArea);
 		DBHelper.getInstance().constructModel(new UserLogGetter());
