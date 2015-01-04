@@ -41,7 +41,7 @@ public class User {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		sb.append(userId + "\n");
+		sb.append("User ID : " + userId + "\n");
 		
 		for(Transition t : behaviorModel.getAllTransition()) {
 			sb.append(t.toString());
