@@ -15,7 +15,15 @@ public class Transition {
 	private double x, y;
 	private String event;
 	private HashSet<String> targets;
-		
+	
+	public void setSrc(State src) {
+		this.src = src;
+	}
+	
+	public void setDst(State dst) {
+		this.dst = dst;
+	}
+	
 	public State getSrc() {
 		return src;
 	}

@@ -15,7 +15,7 @@ public class EFSMUtil {
 	 * @param dst
 	 * @throws Exception 
 	 */
-	private static EFSM merge(EFSM src, EFSM dst, int k) throws Exception {
+	private static EFSM gkTail(EFSM src, EFSM dst, int k) throws Exception {
 
 		if(src == null || dst == null) throw new Exception();
 
@@ -31,11 +31,16 @@ public class EFSMUtil {
 				Transition dstTran = dst.get(j);
 
 				if(srcTran.equals(dstTran)) {
+					
+					srcTran.setDst(dstTran.getSrc());
+					dstTran.setSrc(srcTran.getSrc());
+					
 					mergedEFSM.addStateSeq(srcTran);
 				}
 			}
 		}
-
+		if(mergedEFSM.size() == 0) 
+			return src;
 		return mergedEFSM;
 	}
 	
@@ -45,13 +50,14 @@ public class EFSMUtil {
 
 		EFSM firstEFSM = users.get(0).getBehaviorModel();
 
-		for(User user : users) {
+		for(int i = 1; i < users.size(); ++i) {
 			try {
-				firstEFSM = merge(firstEFSM, user.getBehaviorModel(), k);
+				firstEFSM = gkTail(firstEFSM, users.get(i).getBehaviorModel(), k);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
 		}
+		
 		return firstEFSM;
 	}
 

@@ -96,7 +96,7 @@ public class MainWindow {
 		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
 		for(User user : userViews) {
 			EFSM behaviorModel = user.getBehaviorModel();
-			userPane.add(new EFSMView(behaviorModel));
+			userPane.add(new EFSMView(String.valueOf(user.getId()), behaviorModel));
 		}
 
 		splitPane.setLeftComponent(userPane);
@@ -114,29 +114,19 @@ public class MainWindow {
 		btnMerge.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				mergedPane.removeAll();
+				mergedPane.add(instMerge);
+
 				int k = Integer.valueOf(textField.getText());
-				EFSM mergedEFSM = merge(k);
-				EFSMView mergedView = generateView(mergedEFSM);
+				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
+				EFSMView mergedView = new EFSMView("#", mergedEFSM);
 				mergedPane.add(mergedView);
 				mergedPane.revalidate();
 			}
 		});
 	}
-	private EFSMView generateView(EFSM efsm) {
-		return new EFSMView(efsm);
-	}
-	private EFSM merge(int k) {
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
-		EFSM firstEFSM = users.get(0).getBehaviorModel();
-		for(User user : users) {
-			try {
-				firstEFSM = EFSMUtil.getMergedModel(k);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return firstEFSM;
-	}
+
+	
 	private EFSM getMergedAutomata() {
 		EFSM mergedAutomata = new EFSM();
 		Transition t2 =

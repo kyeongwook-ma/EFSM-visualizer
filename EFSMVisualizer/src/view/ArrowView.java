@@ -18,7 +18,6 @@ public class ArrowView extends JComponent {
 		super.paintComponent(g);
 		assert img != null;
 		g.drawImage(img, 10, 10, this);
-		repaint();
 	}
 	
 }
