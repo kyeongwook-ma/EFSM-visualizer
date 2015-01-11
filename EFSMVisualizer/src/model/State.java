@@ -1,6 +1,6 @@
 package model;
 
-public class State {
+public class State implements XMLGenerator {
 
 	private int stateId;
 	
@@ -27,6 +27,13 @@ public class State {
 		return String.valueOf(stateId);
 	}
 
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 
 

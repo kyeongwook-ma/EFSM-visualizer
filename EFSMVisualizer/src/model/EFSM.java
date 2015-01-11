@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class EFSM {
+public class EFSM implements XMLGenerator {
 
 	private LinkedList<Transition> transitionSeqs;
 
@@ -87,6 +87,12 @@ public class EFSM {
 		}
 
 		return sb.toString();
+	}
+
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Iterator;
  * State ���� transition�� ��Ÿ���� Ŭ����
  * �����(src)�� ������(dst)�� ������ �ִ�.
  */
-public class Transition {
+public class Transition implements XMLGenerator {
 	
 	private State src, dst;
 	private double timestamp;
@@ -187,5 +187,11 @@ public class Transition {
 		return event.equals(t.event) 
 				&& t.src.equals(src)
 				&& t.dst.equals(dst);
+	}
+
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
