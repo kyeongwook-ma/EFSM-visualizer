@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class EFSM implements XMLGenerator {
+public class EFSM implements DotLangGenerator {
 
 	private LinkedList<Transition> transitionSeqs;
 
@@ -90,9 +90,21 @@ public class EFSM implements XMLGenerator {
 	}
 
 	@Override
-	public String toXML() {
-		// TODO Auto-generated method stub
+	public String generateDot() {
+
+		StringBuilder sb = new StringBuilder();
+		ListIterator<Transition> listIter = transitionSeqs.listIterator();
+		while(listIter.hasNext()) {
+			Transition t = listIter.next();
+			
+			State src = t.getSrc();
+			State dst = t.getDst();
+			
+		}
+		
 		return null;
 	}
+
+
 
 }
