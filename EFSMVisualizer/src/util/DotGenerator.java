@@ -5,6 +5,7 @@ import model.Transition;
 public class DotGenerator {
 
 	private static final String NEW_LINE = "\n";
+	private static final String DASH = ",";
 	
 	public static String transition2Dot(Transition t) {
 		
@@ -31,11 +32,11 @@ public class DotGenerator {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(" e : " + t.getEvent());
+		sb.append(" e : " + t.getEvent() + DASH);
 		//sb.append(" target : " + t.getTargets());
-		sb.append(" time : " + t.getTimestamp());
-		sb.append(" x : " + t.getX() );
-		sb.append(" y : " + t.getY() );
+		sb.append(" time : " + t.getTimestamp()+ DASH);
+		sb.append(" x : " + t.getX() + DASH);
+		sb.append(" y : " + t.getY());
 		
 		return sb.toString();
 	}
