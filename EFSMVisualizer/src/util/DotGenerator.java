@@ -1,31 +1,41 @@
 package util;
 
-import model.State;
 import model.Transition;
 
 public class DotGenerator {
 
+	private static final String NEW_LINE = "\n";
+	
 	public static String transition2Dot(Transition t) {
 		
 		StringBuilder sb = new StringBuilder();
 	
 		sb.append(representTransition(t));
-		sb.append(representParam(t));		
+		sb.append(generateLabel(t));		
 		
-		return "";
+		return sb.toString();
 	}
 	
-
+	private static String generateLabel(Transition t) {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("[label=\"");
+		sb.append(representParam(t));
+		sb.append("\"];" + NEW_LINE);
+		
+		return sb.toString();
+	}
 	
 	private static String representParam(Transition t) {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		t.getEvent();
-		t.getTargets();
-		t.getTimestamp();
-		t.getX();
-		t.getY();
+		sb.append(" e : " + t.getEvent());
+		//sb.append(" target : " + t.getTargets());
+		sb.append(" time : " + t.getTimestamp());
+		sb.append(" x : " + t.getX() );
+		sb.append(" y : " + t.getY() );
 		
 		return sb.toString();
 	}

@@ -72,7 +72,7 @@ public class MainWindow {
 		StringBuilder sb = new StringBuilder();
 		for(User user : userLogs) {
 			sb.append(user.toString());
-			System.out.println(user.toString());
+			//System.out.println(user.toString());
 		}
 		logArea.setText(sb.toString());
 		JScrollPane scrollPane = new JScrollPane(logArea);
@@ -119,6 +119,8 @@ public class MainWindow {
 
 				int k = Integer.valueOf(textField.getText());
 				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
+				
+				System.out.println(mergedEFSM.generateDot());
 				EFSMView mergedView = new EFSMView("#", mergedEFSM);
 				mergedPane.add(mergedView);
 				mergedPane.revalidate();

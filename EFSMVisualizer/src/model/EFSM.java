@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import util.DotGenerator;
+
 public class EFSM implements DotLangGenerator {
 
 	private LinkedList<Transition> transitionSeqs;
@@ -93,16 +95,18 @@ public class EFSM implements DotLangGenerator {
 	public String generateDot() {
 
 		StringBuilder sb = new StringBuilder();
+		sb.append("digraph { \n");
+				
 		ListIterator<Transition> listIter = transitionSeqs.listIterator();
 		while(listIter.hasNext()) {
 			Transition t = listIter.next();
-			
-			State src = t.getSrc();
-			State dst = t.getDst();
-			
+			String dotFormat = DotGenerator.transition2Dot(t);
+			sb.append(dotFormat);
 		}
 		
-		return null;
+		sb.append("}");
+		
+		return sb.toString();
 	}
 
 
