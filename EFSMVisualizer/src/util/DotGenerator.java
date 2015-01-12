@@ -1,11 +1,14 @@
 package util;
 
+import java.util.Iterator;
+
 import model.Transition;
 
 public class DotGenerator {
 
 	private static final String NEW_LINE = "\n";
 	private static final String DASH = ",";
+	private static final String EOL = System.getProperty("line.separator");  
 	
 	public static String transition2Dot(Transition t) {
 		
@@ -33,9 +36,15 @@ public class DotGenerator {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(" e : " + t.getEvent() + DASH);
-		//sb.append(" target : " + t.getTargets());
+	
+		Iterator<String> transitionTarget = t.getTargets();
+		while(transitionTarget.hasNext()) {
+			String target = transitionTarget.next();
+			sb.append(" target : " + target + DASH);
+		}
+				
 		sb.append(" time : " + t.getTimestamp()+ DASH);
-		sb.append(" x : " + t.getX() + DASH);
+		sb.append(" x : " + t.getX()+ DASH);
 		sb.append(" y : " + t.getY());
 		
 		return sb.toString();

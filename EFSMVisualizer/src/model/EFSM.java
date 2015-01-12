@@ -95,12 +95,14 @@ public class EFSM implements DotLangGenerator {
 	public String generateDot() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("digraph { \n");
+		sb.append("digraph { ");
 				
 		ListIterator<Transition> listIter = transitionSeqs.listIterator();
 		while(listIter.hasNext()) {
 			Transition t = listIter.next();
 			String dotFormat = DotGenerator.transition2Dot(t);
+			dotFormat = dotFormat.replace("\n", "");
+			dotFormat = dotFormat.replace(",", "\\n");
 			sb.append(dotFormat);
 		}
 		
