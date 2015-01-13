@@ -172,7 +172,15 @@ public class Transition implements XMLGenerator {
 		sb.append("x : " + x + " ,");
 		sb.append("y : " + y + " ,");
 		sb.append("event : " + event + " ,");
-		sb.append("target : " + targets.toString() + " ,");
+		
+		Iterator<String> transitionTarget = getTargets();
+		StringBuilder targetSB = new StringBuilder();
+		while(transitionTarget.hasNext()) {
+			String target = transitionTarget.next();
+			targetSB.append(" " + target);
+		}
+		
+		sb.append("target : " + targetSB.toString() + " ,");
 		sb.append("timestamp : " + String.valueOf(timestamp));
 	
 		return sb.toString();

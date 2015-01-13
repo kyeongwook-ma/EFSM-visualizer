@@ -8,7 +8,7 @@ public class DotGenerator {
 
 	private static final String NEW_LINE = "\n";
 	private static final String DASH = ",";
-	private static final String EOL = System.getProperty("line.separator");  
+	private static final String dstPath = "";
 	
 	public static String transition2Dot(Transition t) {
 		
@@ -19,7 +19,7 @@ public class DotGenerator {
 		
 		return sb.toString();
 	}
-	
+
 	private static String generateLabel(Transition t) {
 		
 		StringBuilder sb = new StringBuilder();
