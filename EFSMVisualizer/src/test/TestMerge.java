@@ -46,7 +46,7 @@ public class TestMerge {
 				new Transition.TransitionBuilder(State.newInstance(3), State.newInstance(4))
 		.x(30).y(40).event("onTouch").timestamp(300).target("이벤트")
 		.createTransition();
-		
+
 		srcAutomata.addStateSeq(t1,t2,t3);
 
 		return srcAutomata;
