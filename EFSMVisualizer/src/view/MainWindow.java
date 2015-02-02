@@ -82,8 +82,8 @@ public class MainWindow {
 		/* merge view */
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
-		JPanel mergedPane = new JPanel();
-		JLabel instMerge = new JLabel("Merged user behavior model");
+		final JPanel mergedPane = new JPanel();
+		final JLabel instMerge = new JLabel("Merged user behavior model");
 		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 30));
 		mergedPane.add(instMerge);
 
@@ -112,13 +112,14 @@ public class MainWindow {
 		JButton btnMerge = new JButton("Merge");
 		mergeMenuPane.add(btnMerge);
 		btnMerge.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				mergedPane.removeAll();
 				mergedPane.add(instMerge);
 
 				int k = Integer.valueOf(textField.getText());
 				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
+				
+				
 				
 				System.out.println(mergedEFSM.generateDot());
 				EFSMView mergedView = new EFSMView("#", mergedEFSM);

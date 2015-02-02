@@ -1,0 +1,1 @@
+digraph {1->2[label=" e : CLICK\n target : MainFr\n time : 75.0\n x : 64.0\n y : 45.0"];2->3[label=" e : CLICK\n target : Etc\n time : 135.0\n x : 78.0\n y : 57.0"];3->4[label=" e : CLICK\n target : Event\n time : 975.0\n x : 70.0\n y : 86.0"];}

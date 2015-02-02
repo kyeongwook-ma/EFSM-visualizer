@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import model.Transition;
 
-public class DotGenerator {
+public class DotTransfomer {
 
 	private static final String NEW_LINE = "\n";
 	private static final String DASH = ",";
