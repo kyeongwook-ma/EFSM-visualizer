@@ -13,8 +13,11 @@ public class GenerateBMProcess {
 			String currentPath = System.getProperty("user.dir") + "\\";
 			System.out.println(currentPath);
 			Runtime runTime = Runtime.getRuntime();
-			
-			final String cmd[] = {"cmd", "java", " -version"};
+			//+ currentPath + "out\\"
+			//+ currentPath + "img\\"
+			final String cmd[] = {"cmd", "/c", "dot" +
+					" -Tpng " + "./out/" +"User_1.dot" +  
+					" -o "  + "./img/" +" out.png"};
 			Process p = //runTime.exec("cmd dot -Tpng simple.dot -o out.png");
 					new ProcessBuilder(cmd).start();
 							
