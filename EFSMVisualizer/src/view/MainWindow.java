@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import util.DotUtil;
 import model.EFSM;
 import model.EFSMUtil;
 import model.ImageCacher;
@@ -34,6 +36,7 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		DotUtil.generateBMImg();
 		ImageCacher.load();
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -61,22 +64,22 @@ public class MainWindow {
 		frame.setBounds(100, 100, 891, 787);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		JPanel logPanel = new JPanel();
+		frame.getContentPane().add(logPanel, BorderLayout.SOUTH);
 		
 		/* log view */
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
 		logArea.setColumns(200);
 		logArea.setEditable(false);
-		panel.add(logArea);
-		DBHelper.getInstance().constructModel(new UserLogGetter());
+		logPanel.add(logArea);
 		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
+		
 		StringBuilder sb = new StringBuilder();
 		for(User user : userLogs) {
 			sb.append(user.toString());
-			//System.out.println(user.toString());
 		}
+		
 		logArea.setText(sb.toString());
 		JScrollPane scrollPane = new JScrollPane(logArea);
 		scrollPane.setPreferredSize(new Dimension(500,200));
@@ -91,17 +94,28 @@ public class MainWindow {
 		mergedPane.add(instMerge);
 
 		/* user behavior model view */
-		JPanel userPane = new JPanel();
-		userPane.setPreferredSize(new Dimension(400,400));		
+
+		
 		JLabel instUser = new JLabel("User behavior model");
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
-		userPane.add(instUser);
+		
+		JPanel userBMPanel = new JPanel();	
+		userBMPanel.setLayout(new BoxLayout(userBMPanel, BoxLayout.Y_AXIS));
+		
 		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
 		for(User user : userViews) {
 			EFSM behaviorModel = user.getBehaviorModel();
-			userPane.add(new EFSMView(String.valueOf(user.getId()), behaviorModel));
+			userBMPanel.add(new EFSMView(String.valueOf(user.getId()), behaviorModel));
 		}
-
+		
+		JScrollPane userBMScroll = new JScrollPane(userBMPanel);
+		userBMScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		JSplitPane userPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		userPane.setPreferredSize(new Dimension(400,400));		
+		userPane.add(instUser);
+		userPane.add(userBMScroll);
+		
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 

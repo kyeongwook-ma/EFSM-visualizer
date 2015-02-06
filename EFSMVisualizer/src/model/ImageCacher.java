@@ -31,10 +31,6 @@ public class ImageCacher {
 	}
 	
 	private static File[] getFileList() {
-		for(String path : new File(System.getProperty("user.dir") + "/img/").list()) {
-			System.out.println(path);
-		}
-		System.out.println(new File(System.getProperty("user.dir") + "/img/").list());
 		return new File(System.getProperty("user.dir") + "/img/").listFiles();
 	}
 	

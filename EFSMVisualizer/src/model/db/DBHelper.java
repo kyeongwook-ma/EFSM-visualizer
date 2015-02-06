@@ -67,7 +67,6 @@ public class DBHelper {
 		constructUserData();
 		
 		assert c != null;
-		List<Transition> rows = new ArrayList<Transition>();
 		Statement stmt = null;
 
 		try {
@@ -84,7 +83,6 @@ public class DBHelper {
 
 			rs.close();
 			stmt.close();
-			c.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -29,12 +29,11 @@ public class EFSMView extends JPanel {
 		this.usrId = usrId;
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		usrLabel.setFont(new Font(usrLabel.getFont().getName(), Font.PLAIN, 20));
 		usrLabel.setText("User " + this.usrId + " : ");
 		add(usrLabel);
-	
+		
 	}
 
 	@Override
