@@ -2,7 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
@@ -13,45 +15,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.EFSM;
+import model.ImageCacher;
 import model.Transition;
 
 public class EFSMView extends JPanel {
 
 	private EFSM automata;
-	private Image arrowImg = ImageCasher.getImage("arrow.png");
 	private JLabel usrLabel = new JLabel(); 
+	private String usrId;
 	
 	public EFSMView(String usrId, EFSM automata) {
 		this.automata = automata;
+		this.usrId = usrId;
+		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		usrLabel.setFont(new Font(usrLabel.getFont().getName(), Font.PLAIN, 20));
-		usrLabel.setText("User " + usrId + " : ");
+		usrLabel.setText("User " + this.usrId + " : ");
 		add(usrLabel);
-		
-		Iterator<Integer> stateSeq = getStateSeq();
-		while(stateSeq.hasNext()) {
-			Integer stateId = stateSeq.next();
-			add(new StateView(stateId.intValue()));
-			add(new ArrowView());
-			repaint();
-		}
+	
 	}
 
-	private Iterator<Integer> getStateSeq() {
-
-		TreeSet<Integer> stateSet = new TreeSet<Integer>();
-
-		List<Transition> transitions = automata.getAllTransition();
-		for(Transition t : transitions) {
-			stateSet.add(t.getSrc().getStateId());
-			stateSet.add(t.getDst().getStateId());
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		try {
+			BufferedImage img = ImageCacher.getImage("User_" + this.usrId + "_out.png");
+			g.drawImage(img, 0, 0, null);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		return stateSet.iterator();
 	}
-
-
-
+	
 }

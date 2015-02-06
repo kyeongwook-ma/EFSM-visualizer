@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import model.EFSM;
 import model.EFSMUtil;
+import model.ImageCacher;
 import model.State;
 import model.Transition;
 import model.User;
@@ -33,6 +34,8 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		ImageCacher.load();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

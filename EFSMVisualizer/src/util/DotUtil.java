@@ -24,7 +24,7 @@ public class DotUtil {
 		fw.close();
 	}
 	
-	public static void generateDotFrmDB() {
+	private static void generateDotFrmDB() {
 		DBHelper.getInstance().constructModel(new UserLogGetter());
 
 		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
@@ -42,31 +42,46 @@ public class DotUtil {
 
 	}
 
-	public static void generateImgFrmDot() {
+	public static void generateBMImg() {
+		
+		generateDotFrmDB();
+		
 		try {
 
-			final String cmd[] = {"cmd", "/c", "dot" +
-					" -Tpng " + "./out/" +"User_1.dot" +  
-					" -o "  + "./img/" +" out.png"};
-			Process p = new ProcessBuilder(cmd).start();
+			File dotFile[] = new File("./out/").listFiles();
+			
+			for(File f : dotFile) {
+				
+				String dotFileName = f.getPath();
+				
+				if(!dotFileName.contains(".dot")) continue;
+				
+				String outFileName = f.getName() + "_out.png";
+				outFileName = "./img/" + outFileName.replace(".dot", "");
+				
+				final String cmd[] = {
+						"cmd", "/c", 
+						"dot" + " -Tpng " + dotFileName + " -o "  + outFileName};
+				Process p = new ProcessBuilder(cmd).start();
+				
+				// SequenceInputStream은 여러개의 스트림을 하나의 스트림으로 연결해줌.
+				SequenceInputStream seqIn = new SequenceInputStream(
+						p.getInputStream(), p.getErrorStream());
 
+				// 스캐너클래스를 사용해 InputStream을 스캔함
+				Scanner s = new Scanner(seqIn);
 
-			// SequenceInputStream은 여러개의 스트림을 하나의 스트림으로 연결해줌.
-			SequenceInputStream seqIn = new SequenceInputStream(
-					p.getInputStream(), p.getErrorStream());
+				while (s.hasNextLine() == true) {
+					// 표준출력으로 출력
+					System.out.println(s.nextLine());
+				}
 
-			// 스캐너클래스를 사용해 InputStream을 스캔함
-			Scanner s = new Scanner(seqIn);
+				// 외부 프로그램 반환값 출력 (이 부분은 필수가 아님)
+				System.out.println("Exit Code: " + p.exitValue());
 
-			while (s.hasNextLine() == true) {
-				// 표준출력으로 출력
-				System.out.println(s.nextLine());
 			}
 
-			// 외부 프로그램 반환값 출력 (이 부분은 필수가 아님)
-			System.out.println("Exit Code: " + p.exitValue());
-			System.exit(p.exitValue()); // 외부 프로그램의 반환값을, 이 자바 프로그램 자체의 반환값으로 삼기
-
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
