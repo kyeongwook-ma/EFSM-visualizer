@@ -15,7 +15,7 @@ import model.db.UserLogGetter;
 
 public class DotUtil {
 
-	private static void dotFileWrite(String fileName, DotLangGenerator generator) throws IOException {
+	public static void dotFileWrite(String fileName, DotLangGenerator generator) throws IOException {
 	
 		final String OUT_PATH = "./out/";
 		

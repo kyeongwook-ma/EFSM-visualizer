@@ -4,8 +4,10 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -28,6 +30,7 @@ import model.User;
 import model.UserBehaviorModels;
 import model.db.DBHelper;
 import model.db.UserLogGetter;
+
 import javax.swing.ScrollPaneConstants;
 
 public class MainWindow {
@@ -92,7 +95,7 @@ public class MainWindow {
 		final JPanel mergedPane = new JPanel();
 		final JLabel instMerge = new JLabel("Merged user behavior model");
 		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 14));
-		mergedPane.add(instMerge);
+		//mergedPane.add(instMerge);
 
 		/* user behavior model view */
 		JLabel instUser = new JLabel("User behavior model");
@@ -128,18 +131,22 @@ public class MainWindow {
 		mergeMenuPane.add(btnMerge);
 		btnMerge.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mergedPane.removeAll();
-				mergedPane.add(instMerge);
-
+				
 				int k = Integer.valueOf(textField.getText());
 				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
+				try {
+					DotUtil.dotFileWrite("User_merged", mergedEFSM);
+					DotUtil.generateBMImg();
+					
+					EFSMView mergedView = new EFSMView("merged");
+ 					mergedPane.setLayout(new BorderLayout());
+ 					mergedPane.add(mergedView, BorderLayout.CENTER);
+			
+					mergedPane.revalidate();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				
-				
-				
-				System.out.println(mergedEFSM.generateDot());
-				EFSMView mergedView = new EFSMView("#");
-				mergedPane.add(mergedView);
-				mergedPane.revalidate();
 			}
 		});
 	}
