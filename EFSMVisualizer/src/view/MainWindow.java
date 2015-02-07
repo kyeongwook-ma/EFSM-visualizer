@@ -83,8 +83,8 @@ public class MainWindow {
 		
 		logArea.setText(sb.toString());
 		JScrollPane logScrollPane = new JScrollPane(logArea);
-		logScrollPane.setPreferredSize(new Dimension(500,100));
-		frame.getContentPane().add(logScrollPane, BorderLayout.SOUTH);
+		//logScrollPane.setPreferredSize(new Dimension(500,100));
+		//frame.getContentPane().add(logScrollPane, BorderLayout.SOUTH);
 
 		/* merge view */
 		JSplitPane splitPane = new JSplitPane();
