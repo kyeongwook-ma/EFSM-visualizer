@@ -20,12 +20,11 @@ import model.Transition;
 
 public class EFSMView extends JPanel {
 
-	private EFSM automata;
 	private JLabel usrLabel = new JLabel(); 
 	private String usrId;
 	
-	public EFSMView(String usrId, EFSM automata) {
-		this.automata = automata;
+	public EFSMView(String usrId) {
+
 		this.usrId = usrId;
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -41,7 +40,7 @@ public class EFSMView extends JPanel {
 		super.paintComponent(g);
 		try {
 			BufferedImage img = ImageCacher.getImage("User_" + this.usrId + "_out.png");
-			g.drawImage(img, 0, 0, null);
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

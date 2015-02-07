@@ -104,8 +104,7 @@ public class MainWindow {
 		
 		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
 		for(User user : userViews) {
-			EFSM behaviorModel = user.getBehaviorModel();
-			userBMPanel.add(new EFSMView(String.valueOf(user.getId()), behaviorModel));
+			userBMPanel.add(new EFSMView(String.valueOf(user.getId())));
 		}
 		
 		JScrollPane userBMScroll = new JScrollPane(userBMPanel);
@@ -139,7 +138,7 @@ public class MainWindow {
 				
 				
 				System.out.println(mergedEFSM.generateDot());
-				EFSMView mergedView = new EFSMView("#", mergedEFSM);
+				EFSMView mergedView = new EFSMView("#");
 				mergedPane.add(mergedView);
 				mergedPane.revalidate();
 			}
