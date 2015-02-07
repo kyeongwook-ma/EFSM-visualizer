@@ -96,7 +96,8 @@ public class EFSM implements DotLangGenerator {
 	public String generateDot() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("digraph {");
+		sb.append("digraph {\n");
+		sb.append("rankdir=\"LR\"\n");
 		
 		ListIterator<Transition> listIter = transitionSeqs.listIterator();
 		while(listIter.hasNext()) {
