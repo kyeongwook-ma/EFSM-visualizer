@@ -28,6 +28,7 @@ import model.User;
 import model.UserBehaviorModels;
 import model.db.DBHelper;
 import model.db.UserLogGetter;
+import javax.swing.ScrollPaneConstants;
 
 public class MainWindow {
 	private JFrame frame;
@@ -81,23 +82,21 @@ public class MainWindow {
 		}
 		
 		logArea.setText(sb.toString());
-		JScrollPane scrollPane = new JScrollPane(logArea);
-		scrollPane.setPreferredSize(new Dimension(500,200));
-		frame.getContentPane().add(scrollPane, BorderLayout.SOUTH);
+		JScrollPane logScrollPane = new JScrollPane(logArea);
+		logScrollPane.setPreferredSize(new Dimension(500,100));
+		frame.getContentPane().add(logScrollPane, BorderLayout.SOUTH);
 
 		/* merge view */
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		final JPanel mergedPane = new JPanel();
 		final JLabel instMerge = new JLabel("Merged user behavior model");
-		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 30));
+		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 14));
 		mergedPane.add(instMerge);
 
 		/* user behavior model view */
-
-		
 		JLabel instUser = new JLabel("User behavior model");
-		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 30));
+		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 14));
 		
 		JPanel userBMPanel = new JPanel();	
 		userBMPanel.setLayout(new BoxLayout(userBMPanel, BoxLayout.Y_AXIS));
@@ -108,10 +107,10 @@ public class MainWindow {
 		}
 		
 		JScrollPane userBMScroll = new JScrollPane(userBMPanel);
-		userBMScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		userBMScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		userBMScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JSplitPane userPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		userPane.setPreferredSize(new Dimension(400,400));		
 		userPane.add(instUser);
 		userPane.add(userBMScroll);
 		
