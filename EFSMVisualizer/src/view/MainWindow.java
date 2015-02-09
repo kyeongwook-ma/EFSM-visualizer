@@ -42,7 +42,7 @@ public class MainWindow {
 	public static void main(String[] args) {
 		DotUtil.generateBMImg();
 		ImageCacher.load();
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -70,7 +70,7 @@ public class MainWindow {
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel logPanel = new JPanel();
 		frame.getContentPane().add(logPanel, BorderLayout.SOUTH);
-		
+
 		/* log view */
 		JTextArea logArea = new JTextArea();
 		logArea.setRows(8);
@@ -78,12 +78,12 @@ public class MainWindow {
 		logArea.setEditable(false);
 		logPanel.add(logArea);
 		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
-		
+
 		StringBuilder sb = new StringBuilder();
 		for(User user : userLogs) {
 			sb.append(user.toString());
 		}
-		
+
 		logArea.setText(sb.toString());
 		JScrollPane logScrollPane = new JScrollPane(logArea);
 		//logScrollPane.setPreferredSize(new Dimension(500,100));
@@ -100,23 +100,23 @@ public class MainWindow {
 		/* user behavior model view */
 		JLabel instUser = new JLabel("User behavior model");
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 14));
-		
+
 		JPanel userBMPanel = new JPanel();	
 		userBMPanel.setLayout(new BoxLayout(userBMPanel, BoxLayout.Y_AXIS));
-		
+
 		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
 		for(User user : userViews) {
 			userBMPanel.add(new EFSMView(String.valueOf(user.getId())));
 		}
-		
+
 		JScrollPane userBMScroll = new JScrollPane(userBMPanel);
 		userBMScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		userBMScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
+
 		JSplitPane userPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		userPane.add(instUser);
 		userPane.add(userBMScroll);
-		
+
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
 
@@ -131,38 +131,25 @@ public class MainWindow {
 		mergeMenuPane.add(btnMerge);
 		btnMerge.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int k = Integer.valueOf(textField.getText());
 				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
 				try {
 					DotUtil.dotFileWrite("User_merged", mergedEFSM);
 					DotUtil.generateBMImg();
-					
+
 					EFSMView mergedView = new EFSMView("merged");
- 					mergedPane.setLayout(new BorderLayout());
- 					mergedPane.add(mergedView, BorderLayout.CENTER);
-			
+					mergedPane.setLayout(new BorderLayout());
+					mergedPane.add(mergedView, BorderLayout.CENTER);
+
 					mergedPane.revalidate();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 	}
 
-	
-	private EFSM getMergedAutomata() {
-		EFSM mergedAutomata = new EFSM();
-		Transition t2 =
-				new Transition.TransitionBuilder(State.newInstance(2), State.newInstance(3))
-		.x(30).y(40).event("onTouch").timestamp(100).target("더보기")
-		.createTransition();
-		Transition t3 =
-				new Transition.TransitionBuilder(State.newInstance(3), State.newInstance(4))
-		.x(30).y(40).event("onTouch").timestamp(300).target("이벤트")
-		.createTransition();
-		mergedAutomata.addStateSeq(t2,t3);
-		return mergedAutomata;
-	}
+
 }
