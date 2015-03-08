@@ -6,18 +6,18 @@ import java.util.List;
 
 public class WholeBMGenerator {
 
-	private HashMap<Transition, Double> transitionRatio
-	= new HashMap<Transition, Double>();
 
-	private void calculateRatio() {
+	public static void calculateRatio() {
 
+		HashMap<Transition, Double> transitionRatio
+		= new HashMap<Transition, Double>();
+		
 		List<Transition> allTransitions = getAllTransition();
 		int transitionSize = allTransitions.size();
 		
 		for(Transition t : allTransitions) {
 
-			if(transitionRatio.containsKey(t)) {
-				
+			if(transitionRatio.containsKey(t)) {	
 				double preRatio = transitionRatio.get(t);
 				double currRatio = getCurrRatio(preRatio, transitionSize);
 				transitionRatio.put(t, currRatio);
@@ -25,17 +25,18 @@ public class WholeBMGenerator {
 			} else {
 				transitionRatio.put(t, (double)(1 / transitionSize));	
 			}
-
-
+			
 		}
+		System.out.print(transitionRatio.toString());
+
 	}
 	
-	private double getCurrRatio(double preRatio, int transitionSize) {
+	private static double getCurrRatio(double preRatio, int transitionSize) {
 		return (1 + preRatio * transitionSize / 100) 
 				/ transitionSize * 100;
 	}
 
-	private List<Transition> getAllTransition() {
+	private static List<Transition> getAllTransition() {
 
 		ArrayList<Transition> transitions = new ArrayList<Transition>();
 

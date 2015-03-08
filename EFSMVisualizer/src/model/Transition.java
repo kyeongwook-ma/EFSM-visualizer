@@ -192,14 +192,17 @@ public class Transition implements XMLGenerator {
 	@Override
 	public boolean equals(Object obj) {
 		Transition t = (Transition) obj;
-		return event.equals(t.event) 
-				&& t.src.equals(src)
-				&& t.dst.equals(dst);
+		return t.src.equals(src) && t.dst.equals(dst);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (String.valueOf(src.getStateId()) + 
+				String.valueOf(dst.getStateId())).hashCode();
 	}
 
 	@Override
 	public String toXML() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
