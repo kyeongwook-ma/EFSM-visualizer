@@ -15,6 +15,8 @@ public class WholeBMGenerator {
 		List<Transition> allTransitions = getAllTransition();
 		int transitionSize = allTransitions.size();
 		
+		System.out.println(allTransitions.toString());
+		
 		for(Transition t : allTransitions) {
 
 			if(transitionRatio.containsKey(t)) {	
@@ -23,7 +25,7 @@ public class WholeBMGenerator {
 				transitionRatio.put(t, currRatio);
 				
 			} else {
-				transitionRatio.put(t, (double)(1 / transitionSize));	
+				transitionRatio.put(t, getRatio(transitionSize));	
 			}
 			
 		}
@@ -31,9 +33,13 @@ public class WholeBMGenerator {
 
 	}
 	
+	private static double getRatio(int transitionSize) {
+		return ((double)1 / transitionSize  * 100);
+	}
+	
 	private static double getCurrRatio(double preRatio, int transitionSize) {
-		return (1 + preRatio * transitionSize / 100) 
-				/ transitionSize * 100;
+		int incrementedCount = (int) (preRatio * transitionSize / 100 ) + 1;
+		return  (double)incrementedCount / (double)transitionSize * 100;
 	}
 
 	private static List<Transition> getAllTransition() {
