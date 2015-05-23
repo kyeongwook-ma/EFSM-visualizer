@@ -44,8 +44,8 @@ public class DotTransfomer {
 		}
 
 		sb.append(" time : " + t.getTimestamp()+ DASH);
-		sb.append(" x : " + t.getX()+ DASH);
-		sb.append(" y : " + t.getY());
+		sb.append(" dx : " + t.getTouchPoint().getX() + DASH);
+		sb.append(" dy : " + t.getTouchPoint().getY());
 
 		return sb.toString();
 	}
