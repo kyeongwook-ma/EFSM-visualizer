@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.User;
-import model.UserBehaviorModels;
 
 public class DBHelper {
 
@@ -33,6 +31,11 @@ public class DBHelper {
 			return new DBHelper();
 		else
 			return instance;
+	}
+	
+	public ResultSet getResultSet(String sql) throws SQLException {
+		Statement statement = c.createStatement();
+		return statement.executeQuery(sql);
 	}
 
 	
