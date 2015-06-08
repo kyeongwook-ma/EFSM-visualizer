@@ -25,7 +25,6 @@ public class DotUtil {
 	}
 	
 	private static void generateDotFrmDB() {
-		DBHelper.getInstance().constructModel(new UserLogGetter());
 
 		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
 
