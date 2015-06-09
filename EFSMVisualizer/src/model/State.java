@@ -29,7 +29,6 @@ public class State implements XMLGenerator {
 
 	@Override
 	public String toXML() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
