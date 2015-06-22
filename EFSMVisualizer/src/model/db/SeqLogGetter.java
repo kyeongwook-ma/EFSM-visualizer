@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Point;
 import model.Transition;
 
 public class SeqLogGetter {
@@ -24,6 +25,15 @@ public class SeqLogGetter {
 				String touchEvent = rs.getString(SeqDBscheme.COLUMN_TOUCHMODE);
 				int timestamp = rs.getInt(SeqDBscheme.COLUMN_TIMESTAMP);
 				
+				String subSql = "SELECT * FROM " 
+							+ SeqDBscheme.TABLE_NAME + " seq " 
+							+ " JOIN " + COORDScheme.TABLE_NAME + " coord "
+							+ " ON " + "seq." + SeqDBscheme.COLUMN_SEQ_ID 
+							+ "coord." + COORDScheme.COLUMN_SEQ_ID + ";";
+				
+				ResultSet joinedRS = DBHelper.getInstance().getResultSet(subSql);
+				
+				List<Point> points = getPoints(joinedRS);
 				
 				
 			}
@@ -35,6 +45,18 @@ public class SeqLogGetter {
 		}
 		
 		return null;
+	}
+
+	private List<Point> getPoints(ResultSet joinedRS) throws SQLException {
+		ArrayList<Point> points = new ArrayList<Point>();
+		
+		while(joinedRS.next()) {
+			int x = joinedRS.getInt(COORDScheme.COLUMN_X);
+			int y = joinedRS.getInt(COORDScheme.COLUMN_Y);
+			points.add(new Point(x, y));
+		}
+		
+		return points;
 	}
 	
 }
