@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Point;
+import model.State;
 import model.Transition;
+import model.Transition.TransitionBuilder;
 
 public class SeqLogGetter {
 	
@@ -34,17 +36,22 @@ public class SeqLogGetter {
 				ResultSet joinedRS = DBHelper.getInstance().getResultSet(subSql);
 				
 				List<Point> points = getPoints(joinedRS);
+			
+				Transition t = new TransitionBuilder(
+								State.newInstance(seqId),State.newInstance(seqId+1))
+								.event(touchEvent)
+								.target(touchClass)
+								.timestamp(timestamp)
+								.createTransition();
 				
-				
+				seqs.add(t);
 			}
-			
-			
-			
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return seqs;
 	}
 
 	private List<Point> getPoints(ResultSet joinedRS) throws SQLException {
