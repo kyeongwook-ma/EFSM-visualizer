@@ -1,10 +1,8 @@
-package view;
+package main.view;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,19 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import util.DotUtil;
-import model.EFSM;
-import model.EFSMUtil;
-import model.ImageCacher;
-import model.State;
-import model.Transition;
-import model.User;
-import model.UserBehaviorModels;
-import model.db.DBHelper;
-import model.db.UserLogGetter;
-
 import javax.swing.ScrollPaneConstants;
+
+import main.model.EFSMUtil;
+import main.model.ImageCacher;
+import main.model.UserBehaviorModels;
+import main.model.entity.EFSM;
+import main.model.entity.User;
+import main.util.DotUtil;
 
 public class MainWindow {
 	private JFrame frame;

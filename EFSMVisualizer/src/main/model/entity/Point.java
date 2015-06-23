@@ -1,4 +1,4 @@
-package model;
+package main.model.entity;
 
 public class Point {
 	private double x, y;

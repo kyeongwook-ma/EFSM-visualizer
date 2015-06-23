@@ -1,4 +1,4 @@
-package model;
+package main.model.entity;
 
 import java.util.HashSet;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package util;
+package main.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,20 +7,18 @@ import java.io.SequenceInputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import model.EFSM;
-import model.User;
-import model.UserBehaviorModels;
-import model.db.DBHelper;
-import model.db.UserLogGetter;
+import main.model.UserBehaviorModels;
+import main.model.entity.EFSM;
+import main.model.entity.User;
 
 public class DotUtil {
 
-	public static void dotFileWrite(String fileName, DotLangGenerator generator) throws IOException {
+	public static void dotFileWrite(String fileName, EFSM bm) throws IOException {
 	
 		final String OUT_PATH = "./out/";
 		
 		FileWriter fw = new FileWriter(new File(OUT_PATH + fileName + ".dot"));
-		fw.write(generator.generateDot());
+		fw.write(bm.generateDot());
 		fw.close();
 	}
 	

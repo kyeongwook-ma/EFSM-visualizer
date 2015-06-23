@@ -1,8 +1,12 @@
-package model;
+package main.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import main.model.entity.EFSM;
+import main.model.entity.Transition;
+import main.model.entity.User;
 
 public class WholeBMGenerator {
 

@@ -1,12 +1,11 @@
-package model;
+package main.model.entity;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import util.DotTransfomer;
-import util.DotLangGenerator;
+import main.util.DotLangGenerator;
+import main.util.DotTransfomer;
 
 public class EFSM implements DotLangGenerator {
 

@@ -1,7 +1,6 @@
-package view;
+package main.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.ImageCacher;
+import main.model.ImageCacher;
 
 public class EFSMView extends JPanel {
 

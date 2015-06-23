@@ -1,8 +1,8 @@
-package util;
+package main.util;
 
 import java.util.Iterator;
 
-import model.Transition;
+import main.model.entity.Transition;
 
 public class DotTransfomer {
 
