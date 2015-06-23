@@ -15,29 +15,40 @@ public class TouchEventClassfier {
 			else if(isUpside(ys))
 				return TouchEventType.SCROLL_UP;
 		}
-
+		
 		return TouchEventType.UNKNOWN;
+
 	}
+	
 	private static boolean isDownside(double[] ys) {
 
 		int COORDlength = ys.length;
-
+		
+		double tmp = 1;
 		for(int i = 0; i < COORDlength / 2; ++i) {
-			if(ys[i+1] - ys[i] < 0)
-				return true;
+			double diff = ys[i] - ys[i+1];
+			tmp *= diff;
 		}
+		
+		if(tmp < 0 && ys[COORDlength-1] - ys[0] > 0) 
+			return true;
 
 		return false;
 	}
-
+	
+	
 	private static boolean isUpside(double[] ys) {
 
 		int COORDlength = ys.length;
-
+		
+		double tmp = 1;
 		for(int i = 0; i < COORDlength / 2; ++i) {
-			if(ys[i+1] - ys[i] > 0)
-				return true;
+			double diff = ys[i] - ys[i+1];
+			tmp *= diff;
 		}
+		
+		if(tmp > 0 && ys[COORDlength-1] - ys[0] < 0) 
+			return true;
 
 		return false;
 	}
