@@ -26,23 +26,9 @@ public class UserBehaviorModels {
 	
 	public List<User> getAllUsers() {
 		
-		
-		
-		
-		
 		return users;
 	}
 	
-	private String generateXMLString() {
-		
-		StringBuilder sb = new StringBuilder();
-		
-		for(XMLGenerator xmlGen : users) {
-			sb.append(xmlGen.toXML());
-		}
-		
-		return sb.toString();
-	}
 	
 	public static UserBehaviorModels getInstance() {
 		if(instance == null)

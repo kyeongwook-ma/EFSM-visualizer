@@ -8,7 +8,7 @@ import java.util.Iterator;
  * State ���� transition�� ��Ÿ���� Ŭ����
  * �����(src)�� ������(dst)�� ������ �ִ�.
  */
-public class Transition implements XMLGenerator {
+public class Transition {
 
 	private State src, dst;
 	private double timestamp;
@@ -197,10 +197,6 @@ public class Transition implements XMLGenerator {
 				String.valueOf(dst.getStateId())).hashCode();
 	}
 
-	@Override
-	public String toXML() {
-		return null;
-	}
 
 	
 }

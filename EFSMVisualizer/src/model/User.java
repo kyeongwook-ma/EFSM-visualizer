@@ -1,6 +1,6 @@
 package model;
 
-public class User implements XMLGenerator {
+public class User {
 	private int id;
 	private EFSM behaviorModel;
 	private int timestamp;
@@ -51,9 +51,4 @@ public class User implements XMLGenerator {
 		return sb.toString();
 	}
 
-	@Override
-	public String toXML() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

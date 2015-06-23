@@ -1,6 +1,6 @@
 package model;
 
-public class State implements XMLGenerator {
+public class State {
 
 	private int stateId;
 	
@@ -26,13 +26,6 @@ public class State implements XMLGenerator {
 	public String toString() {
 		return String.valueOf(stateId);
 	}
-
-	@Override
-	public String toXML() {
-		return null;
-	}
-
-	
 
 
 
