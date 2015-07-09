@@ -10,9 +10,8 @@ import main.model.entity.User;
 
 public class UserLogGetter{
 	
-
 	public List<User> getUserFromDB() {
-		String sql = "";
+		String sql = "SELECT * FROM " + UserScheme.TABLE_NAME + ";";
 		
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -20,11 +19,10 @@ public class UserLogGetter{
 			ResultSet rs = DBHelper.getInstance().getResultSet(sql);
 			
 			while(rs.next()) {
-				
-				String userName = rs.getString(UserScheme.COLUMN_USR_ID);
+				int userId = rs.getInt(UserScheme.COLUMN_USR_ID);
 				int time = rs.getInt(UserScheme.COLUMN_TIME);
-				
-				
+				User user = new User(userId, time);
+				users.add(user);
 			}
 			
 			

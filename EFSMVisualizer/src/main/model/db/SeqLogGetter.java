@@ -39,6 +39,7 @@ public class SeqLogGetter {
 			
 				Transition t = new TransitionBuilder(
 								State.newInstance(seqId),State.newInstance(seqId+1))
+								.point(points)
 								.event(touchEvent)
 								.target(touchClass)
 								.timestamp(timestamp)

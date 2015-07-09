@@ -2,6 +2,7 @@ package main.model.entity;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author se
@@ -13,7 +14,7 @@ public class Transition {
 	private State src, dst;
 	private double timestamp;
 	private String event;
-	private Point touchPoint;
+	private List<Point> touchPoints;
 	private HashSet<String> targets;
 
 
@@ -42,12 +43,12 @@ public class Transition {
 	}
 
 
-	public Point getTouchPoint() {
-		return touchPoint;
+	public List<Point> getTouchPoint() {
+		return touchPoints;
 	}
 
-	public void setTouchPoint(Point touchPoint) {
-		this.touchPoint = touchPoint;
+	public void setTouchPoint(List<Point> touchPoints) {
+		this.touchPoints = touchPoints;
 	}
 
 	public void setTargets(HashSet<String> targets) {
@@ -89,7 +90,7 @@ public class Transition {
 
 		private State src, dst;
 		private double timestamp;
-		private Point touchPoint;
+		private List<Point> touchPoints;
 		private String event;
 		private HashSet<String> targets;
 
@@ -100,12 +101,12 @@ public class Transition {
 
 			targets = new HashSet<String>();
 		}
-
-		public TransitionBuilder point(Point p) {
-			this.touchPoint = p;
+		
+		public TransitionBuilder point(List<Point> points) {
+			this.touchPoints = points;
 			return this;
 		}
-
+		
 		public TransitionBuilder event(String event) {
 			this.event = event;
 			return this;
@@ -127,8 +128,8 @@ public class Transition {
 		public Transition createTransition() {
 			Transition t = new Transition(this.src, this.dst);
 			t.setEvent(this.event);
-			t.setTouchPoint(this.touchPoint);
-			t.addTarget(targets);
+			t.setTouchPoint(this.touchPoints);
+			t.addTarget(this.targets);
 			t.setTimestamp(this.timestamp);
 			return t;
 		}
@@ -139,18 +140,6 @@ public class Transition {
 	}
 
 	public void expend(Transition transition) {
-
-		double transitionX = transition.getTouchPoint().getX();
-		double transitionY = transition.getTouchPoint().getY();
-
-		/* �� ���� ������ ���� �Ҵ��� */
-		this.touchPoint.setX(this.touchPoint.getX() - transitionX > 0 ? 
-				transitionX : 
-				this.getTouchPoint().getX()); 
-
-		this.touchPoint.setY(this.touchPoint.getY() - transitionX > 0 ? 
-				transitionY : 
-				this.getTouchPoint().getY()); 
 
 		/* target �߰� */
 		Iterator<String> transitionTarget = transition.getTargets();
@@ -165,8 +154,12 @@ public class Transition {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( "\n" + src.toString() + " -> " + dst.toString() + "\n");
-		sb.append("x : " + this.getTouchPoint().getX() + " ,");
-		sb.append("y : " + this.getTouchPoint().getY() + " ,");
+		
+		for(Point p : this.getTouchPoint()) {
+			sb.append("x : " + p.getX() + " ,");
+			sb.append("y : " + p.getY() + " ,");
+		}
+		
 		sb.append("event : " + event + " ,");
 
 		Iterator<String> transitionTarget = getTargets();
