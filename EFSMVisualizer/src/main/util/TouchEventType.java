@@ -9,7 +9,15 @@ public enum TouchEventType {
 	 private String eventType;
 	 
 	 private TouchEventType(String eventType) {
-		 this.eventType = eventType;
+		 this.setEventType(eventType);
 	 }
+
+	public String getEventType() {
+		return eventType;
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
+	}
 	 
 }
