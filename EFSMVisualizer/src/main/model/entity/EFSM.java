@@ -10,13 +10,22 @@ import main.util.DotTransfomer;
 public class EFSM implements DotLangGenerator {
 
 	private LinkedList<Transition> transitionSeqs;
-
+	private int elapsedTime;
+	
 	public EFSM() {
 		transitionSeqs = new LinkedList<Transition>();
 	}
 	
 	public List<Transition> getAllTransition() {
 		return transitionSeqs;
+	}
+	
+	public void setElapsedTime(int elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+	
+	public int getElapsedTime() {
+		return elapsedTime;
 	}
 
 	public int size() {

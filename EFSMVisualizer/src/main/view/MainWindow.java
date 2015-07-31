@@ -33,8 +33,8 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		DotUtil.generateBMImg();
-		ImageCacher.load();
+		//DotUtil.generateBMImg();
+		//ImageCacher.load();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
