@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import main.model.EFSMUtil;
-import main.model.ImageCacher;
 import main.model.UserBehaviorModels;
 import main.model.entity.EFSM;
 import main.model.entity.User;
@@ -65,23 +64,21 @@ public class MainWindow {
 		frame.getContentPane().add(logPanel, BorderLayout.SOUTH);
 
 		/* log view */
-		JTextArea logArea = new JTextArea();
-		logArea.setRows(8);
-		logArea.setColumns(200);
-		logArea.setEditable(false);
-		logPanel.add(logArea);
-		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
-
-		StringBuilder sb = new StringBuilder();
-		for(User user : userLogs) {
-			sb.append(user.toString());
-		}
-
-		logArea.setText(sb.toString());
-		JScrollPane logScrollPane = new JScrollPane(logArea);
-		//logScrollPane.setPreferredSize(new Dimension(500,100));
-		//frame.getContentPane().add(logScrollPane, BorderLayout.SOUTH);
-
+//		JTextArea logArea = new JTextArea();
+//		logArea.setRows(8);
+//		logArea.setColumns(200);
+//		logArea.setEditable(false);
+//		logPanel.add(logArea);
+//		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
+//
+//		StringBuilder sb = new StringBuilder();
+//		for(User user : userLogs) {
+//			sb.append(user.toString());
+//		}
+//
+//		logArea.setText(sb.toString());
+//		JScrollPane logScrollPane = new JScrollPane(logArea);
+		
 		/* merge view */
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);

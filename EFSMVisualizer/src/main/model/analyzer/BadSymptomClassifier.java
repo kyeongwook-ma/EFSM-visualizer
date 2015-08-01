@@ -22,7 +22,7 @@ public class BadSymptomClassifier {
 			return GUIBadSymptom.LONG_LATENCY;
 
 
-		return null;
+		return GUIBadSymptom.UNKNOWN;
 	}
 
 	private boolean isWrongPosition(EFSM mergedModel, EFSM designedModel, String targetClass) {
@@ -54,12 +54,13 @@ public class BadSymptomClassifier {
 		List<Transition> diffTransition = DiffTransitionExtractor
 				.extractDiff(mergedModel, designedModel);
 
-		for(Transition t : diffTransition) {
-			if(t.getEvent().equals(GUIBadSymptom.UNKNOWN))
-				return true;
-		}
+		int undefinedCount = 
+				(int) diffTransition
+				.parallelStream()
+				.filter(t -> t.getEvent().equals(GUIBadSymptom.UNDEFINED_GESTURE))
+				.count();
 
-		return false;
+		return undefinedCount > 0 ? true : false;
 	}
 
 	private boolean isRepeated(EFSM mergedModel, EFSM designedModel, String targetClass) {
@@ -68,36 +69,21 @@ public class BadSymptomClassifier {
 
 		List<Transition> diffTransition = DiffTransitionExtractor
 				.extractDiff(mergedModel, designedModel);
+		
+		HashSet<Transition> uniqueTransitions = new HashSet<Transition>();
+		
+		int uniqueCount = (int) uniqueTransitions
+			.parallelStream()
+			.filter(t -> countTransition(diffTransition, t) > REPEAT_COUNT)
+			.count();
 
-		Iterator<Transition> uniqueTransition = getUniqueTransitionIter(diffTransition);
-
-		while(uniqueTransition.hasNext()) {
-			Transition t = uniqueTransition.next();
-
-			if(countTransition(diffTransition, t) > REPEAT_COUNT)
-				return true;
-		}
-
-		return false;		
+		return uniqueCount > 0 ? true : false;		
 	}
 
 	private int countTransition(List<Transition> transitions, Transition countTransition) {
 
-		int count = 0;
-
-		for(Transition t : transitions) {
-			if(t.equals(countTransition))
-				++count;
-		}
-
-		return count;
-	}
-
-
-	private Iterator<Transition> getUniqueTransitionIter(List<Transition> diffTransition) {
-		HashSet<Transition> transitionSet = new HashSet<Transition>(diffTransition);
-
-		return transitionSet.iterator();
+		return (int) transitions.parallelStream()
+			.filter(t -> t.equals(countTransition)).count();		
 	}
 
 	private boolean isLongLatency(EFSM mergedModel, EFSM designedModel) {
