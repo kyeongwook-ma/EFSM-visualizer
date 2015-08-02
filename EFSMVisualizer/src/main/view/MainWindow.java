@@ -24,6 +24,8 @@ import main.model.UserBehaviorModels;
 import main.model.entity.EFSM;
 import main.model.entity.User;
 import main.util.DotUtil;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
 
 public class MainWindow {
 	private JFrame frame;
@@ -59,35 +61,17 @@ public class MainWindow {
 		frame.setBounds(100, 100, 891, 787);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		JPanel logPanel = new JPanel();
-		frame.getContentPane().add(logPanel, BorderLayout.SOUTH);
 
-		/* log view */
-//		JTextArea logArea = new JTextArea();
-//		logArea.setRows(8);
-//		logArea.setColumns(200);
-//		logArea.setEditable(false);
-//		logPanel.add(logArea);
-//		List<User> userLogs = UserBehaviorModels.getInstance().getAllUsers();
-//
-//		StringBuilder sb = new StringBuilder();
-//		for(User user : userLogs) {
-//			sb.append(user.toString());
-//		}
-//
-//		logArea.setText(sb.toString());
-//		JScrollPane logScrollPane = new JScrollPane(logArea);
-		
 		/* merge view */
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
-		final JPanel mergedPane = new JPanel();
 		final JLabel instMerge = new JLabel("Merged user behavior model");
 		instMerge.setFont(new Font(instMerge.getFont().getName(), Font.PLAIN, 14));
-		//mergedPane.add(instMerge);
-
+		splitPane.setResizeWeight(0.5);
+		
 		/* user behavior model view */
 		JLabel instUser = new JLabel("User behavior model");
+		instUser.setHorizontalAlignment(SwingConstants.CENTER);
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 14));
 
 		JPanel userBMPanel = new JPanel();	
@@ -102,12 +86,26 @@ public class MainWindow {
 		userBMScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		userBMScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		JSplitPane userPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		userPane.add(instUser);
-		userPane.add(userBMScroll);
+		JSplitPane leftPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		leftPane.add(instUser);
+		leftPane.add(userBMScroll);
 
-		splitPane.setLeftComponent(userPane);
-		splitPane.setRightComponent(mergedPane);
+		splitPane.setLeftComponent(leftPane);
+		splitPane.setResizeWeight(0.5);
+		
+		JSplitPane rightPane = new JSplitPane();
+		rightPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPane.setRightComponent(rightPane);
+		
+		JPanel transitionPane = new JPanel();
+		rightPane.setRightComponent(transitionPane);
+		transitionPane.setLayout(null);
+		
+		JPanel statePane = new JPanel();
+		rightPane.setLeftComponent(statePane);
+		
+
+
 	}
 
 
