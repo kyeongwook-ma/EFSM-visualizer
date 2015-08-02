@@ -26,6 +26,9 @@ import main.model.entity.User;
 import main.util.DotUtil;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class MainWindow {
 	private JFrame frame;
@@ -95,18 +98,38 @@ public class MainWindow {
 		
 		JSplitPane rightPane = new JSplitPane();
 		rightPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		rightPane.setResizeWeight(0.5);
 		splitPane.setRightComponent(rightPane);
 		
 		JPanel transitionPane = new JPanel();
 		rightPane.setRightComponent(transitionPane);
-		transitionPane.setLayout(null);
+		transitionPane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("Transition");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		transitionPane.add(lblNewLabel_1, BorderLayout.NORTH);
+		
+		JPanel panel = new JPanel();
+		transitionPane.add(panel, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0};
+		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
 		JPanel statePane = new JPanel();
 		rightPane.setLeftComponent(statePane);
+		statePane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel = new JLabel("State");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		statePane.add(lblNewLabel, BorderLayout.NORTH);
+		
+		JPanel picPane = new JPanel();
+		statePane.add(picPane);
 		
 
 
 	}
-
-
 }
