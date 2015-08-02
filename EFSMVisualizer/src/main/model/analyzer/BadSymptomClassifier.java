@@ -20,6 +20,8 @@ public class BadSymptomClassifier {
 			return GUIBadSymptom.UNDEFINED_GESTURE;
 		else if(isLongLatency(mergedModel, designedModel))
 			return GUIBadSymptom.LONG_LATENCY;
+		else if(isRepeated(mergedModel, designedModel, targetClass))
+			return GUIBadSymptom.REPEATED_GESTURE;
 
 
 		return GUIBadSymptom.UNKNOWN;
@@ -81,7 +83,6 @@ public class BadSymptomClassifier {
 	}
 
 	private int countTransition(List<Transition> transitions, Transition countTransition) {
-
 		return (int) transitions.parallelStream()
 			.filter(t -> t.equals(countTransition)).count();		
 	}

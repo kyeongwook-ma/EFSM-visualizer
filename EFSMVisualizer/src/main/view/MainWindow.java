@@ -27,7 +27,6 @@ import main.util.DotUtil;
 
 public class MainWindow {
 	private JFrame frame;
-	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -109,36 +108,6 @@ public class MainWindow {
 
 		splitPane.setLeftComponent(userPane);
 		splitPane.setRightComponent(mergedPane);
-
-		/* merge menu */
-		JPanel mergeMenuPane = new JPanel();
-		frame.getContentPane().add(mergeMenuPane, BorderLayout.NORTH);
-		textField = new JTextField();
-		textField.setColumns(10);
-		mergeMenuPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		mergeMenuPane.add(textField);
-		JButton btnMerge = new JButton("Merge");
-		mergeMenuPane.add(btnMerge);
-		btnMerge.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				int k = Integer.valueOf(textField.getText());
-				EFSM mergedEFSM = EFSMUtil.getMergedModel(k);
-				try {
-					DotUtil.dotFileWrite("User_merged", mergedEFSM);
-					DotUtil.generateBMImg();
-
-					EFSMView mergedView = new EFSMView("merged");
-					mergedPane.setLayout(new BorderLayout());
-					mergedPane.add(mergedView, BorderLayout.CENTER);
-
-					mergedPane.revalidate();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
 	}
 
 
