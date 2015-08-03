@@ -10,28 +10,28 @@ import main.model.entity.State;
 import main.model.entity.Transition;
 import main.model.entity.Transition.TransitionBuilder;
 
-public class SeqLogGetter {
+public class TransitionGetter {
 	
-	public List<Transition> getUserFromDB() {
+	public static List<Transition> getTransitionFromDB() {
 		
 		ArrayList<Transition> seqs = new ArrayList<Transition>();
-		String sql = "SELECT * FROM " + SeqDBscheme.TABLE_NAME + ";";
+		String sql = "SELECT * FROM " + TransitionDBscheme.TABLE_NAME + ";";
 		
 		try {
 			ResultSet rs = DBHelper.getInstance().getResultSet(sql);
 			
 			while(rs.next()) {
 				
-				int seqId = rs.getInt(SeqDBscheme.COLUMN_SEQ_ID);
-				String touchClass = rs.getString(SeqDBscheme.COLUMN_TOUCHCLASS);
-				String touchEvent = rs.getString(SeqDBscheme.COLUMN_TOUCHMODE);
-				int timestamp = rs.getInt(SeqDBscheme.COLUMN_TIMESTAMP);
+				int seqId = rs.getInt(TransitionDBscheme.COLUMN_SEQ_ID);
+				String touchClass = rs.getString(TransitionDBscheme.COLUMN_TOUCHCLASS);
+				String touchEvent = rs.getString(TransitionDBscheme.COLUMN_TOUCHMODE);
+				int timestamp = rs.getInt(TransitionDBscheme.COLUMN_TIMESTAMP);
 				
 				String subSql = "SELECT * FROM " 
-							+ SeqDBscheme.TABLE_NAME + " seq " 
+							+ TransitionDBscheme.TABLE_NAME + " seq " 
 							+ " JOIN " + COORDScheme.TABLE_NAME + " coord "
-							+ " ON " + "seq." + SeqDBscheme.COLUMN_SEQ_ID 
-							+ "coord." + COORDScheme.COLUMN_SEQ_ID + ";";
+							+ " ON " + "seq." + TransitionDBscheme.COLUMN_SEQ_ID 
+							+ " = coord." + COORDScheme.COLUMN_SEQ_ID + ";";
 				
 				ResultSet joinedRS = DBHelper.getInstance().getResultSet(subSql);
 				
@@ -55,7 +55,7 @@ public class SeqLogGetter {
 		return seqs;
 	}
 
-	private List<Point> getPoints(ResultSet joinedRS) throws SQLException {
+	private static List<Point> getPoints(ResultSet joinedRS) throws SQLException {
 		ArrayList<Point> points = new ArrayList<Point>();
 		
 		while(joinedRS.next()) {

@@ -8,9 +8,9 @@ import java.util.List;
 import main.model.entity.User;
 
 
-public class UserLogGetter{
+public class UserGetter{
 	
-	public List<User> getUserFromDB() {
+	public static List<User> getUserFromDB() {
 		String sql = "SELECT * FROM " + UserScheme.TABLE_NAME + ";";
 		
 		ArrayList<User> users = new ArrayList<User>();

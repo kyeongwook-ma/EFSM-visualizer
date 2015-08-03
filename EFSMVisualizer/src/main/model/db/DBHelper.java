@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class DBHelper {
 
 	private Connection c;
-	private static final String dbName = "TestDB";
+	private static final String dbName = "BadUIDB";
 	private static DBHelper instance = new DBHelper();
 
 	private DBHelper() {

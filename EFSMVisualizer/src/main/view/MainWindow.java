@@ -20,7 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import main.model.EFSMUtil;
-import main.model.UserBehaviorModels;
+import main.model.ImageCacher;
+import main.model.ModelManager;
 import main.model.entity.EFSM;
 import main.model.entity.User;
 import main.util.DotUtil;
@@ -40,8 +41,8 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//DotUtil.generateBMImg();
-		//ImageCacher.load();
+		DotUtil.generateBMImg();
+		ImageCacher.load();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -84,7 +85,7 @@ public class MainWindow {
 		JPanel userBMPanel = new JPanel();
 		userBMPanel.setLayout(new BoxLayout(userBMPanel, BoxLayout.Y_AXIS));
 
-		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
+		List<User> userViews = ModelManager.getInstance().getAllUsers();
 		for(User user : userViews) {
 			userBMPanel.add(new EFSMView(String.valueOf(user.getId())));
 		}

@@ -1,6 +1,6 @@
 package main.model.db;
 
-class SeqDBscheme {
+class TransitionDBscheme {
 	public static final String TABLE_NAME = "SeqTable";
 	public static final String COLUMN_SEQ_ID = "seq_id";
 	public static final String COLUMN_TOUCHCLASS = "touch_class";

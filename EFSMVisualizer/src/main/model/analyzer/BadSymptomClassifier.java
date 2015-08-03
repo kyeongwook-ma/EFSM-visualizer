@@ -79,7 +79,7 @@ public class BadSymptomClassifier {
 			.filter(t -> countTransition(diffTransition, t) > REPEAT_COUNT)
 			.count();
 
-		return uniqueCount > 0 ? true : false;		
+		return uniqueCount > 0 ? true : false;
 	}
 
 	private int countTransition(List<Transition> transitions, Transition countTransition) {

@@ -1,5 +1,6 @@
 package main.model.entity;
 
+import java.util.List;
 
 public class User {
 	private int id;
@@ -14,6 +15,12 @@ public class User {
 	
 	public void addBehavior(Transition t) {
 		behaviorModel.addStateSeq(t);
+	}
+	
+	public void addBehavior(List<Transition> transitions) {
+		for(Transition t : transitions) {
+			addBehavior(t);
+		}
 	}
 	
 	public int getId() {

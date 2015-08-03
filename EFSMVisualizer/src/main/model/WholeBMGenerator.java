@@ -50,7 +50,7 @@ public class WholeBMGenerator {
 
 		ArrayList<Transition> transitions = new ArrayList<Transition>();
 
-		List<User> allUsers = UserBehaviorModels.getInstance().getAllUsers();
+		List<User> allUsers = ModelManager.getInstance().getAllUsers();
 
 		for(User user : allUsers) {
 			EFSM efsm = user.getBehaviorModel();

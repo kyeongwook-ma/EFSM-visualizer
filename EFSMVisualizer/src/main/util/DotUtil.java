@@ -7,7 +7,7 @@ import java.io.SequenceInputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import main.model.UserBehaviorModels;
+import main.model.ModelManager;
 import main.model.entity.EFSM;
 import main.model.entity.User;
 
@@ -24,11 +24,13 @@ public class DotUtil {
 	
 	private static void generateDotFrmDB() {
 
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+		List<User> users = ModelManager.getInstance().getAllUsers();
 
 		for(User u : users) {
 			int userId = u.getId();
 			EFSM bm = u.getBehaviorModel();
+			
+			
 
 			try {
 				dotFileWrite( "User_" + String.valueOf(userId), bm);
@@ -56,8 +58,7 @@ public class DotUtil {
 				String outFileName = f.getName() + "_out.png";
 				outFileName = "./img/" + outFileName.replace(".dot", "");
 				
-				final String cmd[] = {
-						"cmd", "/c", 
+				final String cmd[] = {"/bin/sh",
 						"dot" + " -Tpng " + dotFileName + " -o "  + outFileName};
 				Process p = new ProcessBuilder(cmd).start();
 				

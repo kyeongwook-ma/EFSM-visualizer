@@ -50,7 +50,7 @@ public class EFSMUtil {
 	
 
 	public static EFSM getMergedModel(int k) {
-		List<User> users = UserBehaviorModels.getInstance().getAllUsers();
+		List<User> users = ModelManager.getInstance().getAllUsers();
 
 		EFSM firstEFSM = users.get(0).getBehaviorModel();
 
