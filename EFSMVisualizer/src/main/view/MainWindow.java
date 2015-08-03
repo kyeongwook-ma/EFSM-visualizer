@@ -29,9 +29,13 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import net.miginfocom.swing.MigLayout;
+import java.awt.CardLayout;
 
 public class MainWindow {
 	private JFrame frame;
+	private JTextField screenText;
+	private JTextField actionText;
 	/**
 	 * Launch the application.
 	 */
@@ -77,7 +81,7 @@ public class MainWindow {
 		instUser.setHorizontalAlignment(SwingConstants.CENTER);
 		instUser.setFont(new Font(instUser.getFont().getName(), Font.PLAIN, 14));
 
-		JPanel userBMPanel = new JPanel();	
+		JPanel userBMPanel = new JPanel();
 		userBMPanel.setLayout(new BoxLayout(userBMPanel, BoxLayout.Y_AXIS));
 
 		List<User> userViews = UserBehaviorModels.getInstance().getAllUsers();
@@ -109,14 +113,53 @@ public class MainWindow {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		transitionPane.add(lblNewLabel_1, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel();
-		transitionPane.add(panel, BorderLayout.SOUTH);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		JPanel transitionContentPane = new JPanel();
+		transitionPane.add(transitionContentPane, BorderLayout.CENTER);
+		GridBagLayout gbl_transitionContentPane = new GridBagLayout();
+		gbl_transitionContentPane.columnWidths = new int[]{0, 0};
+		gbl_transitionContentPane.rowHeights = new int[]{0, 0, 0};
+		gbl_transitionContentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_transitionContentPane.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		transitionContentPane.setLayout(gbl_transitionContentPane);
+		
+		JPanel screenParentPane = new JPanel();
+		GridBagConstraints gbc_screenParentPane = new GridBagConstraints();
+		gbc_screenParentPane.insets = new Insets(0, 0, 5, 0);
+		gbc_screenParentPane.fill = GridBagConstraints.BOTH;
+		gbc_screenParentPane.gridx = 0;
+		gbc_screenParentPane.gridy = 0;
+		transitionContentPane.add(screenParentPane, gbc_screenParentPane);
+		screenParentPane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_2 = new JLabel("Screen");
+		screenParentPane.add(lblNewLabel_2, BorderLayout.WEST);
+		
+		JPanel screenPane = new JPanel();
+		screenParentPane.add(screenPane, BorderLayout.CENTER);
+		screenPane.setLayout(new BorderLayout(0, 0));
+		
+		screenText = new JTextField();
+		screenPane.add(screenText);
+		screenText.setColumns(10);
+		
+		JPanel actionParentPane = new JPanel();
+		GridBagConstraints gbc_actionParentPane = new GridBagConstraints();
+		gbc_actionParentPane.fill = GridBagConstraints.BOTH;
+		gbc_actionParentPane.gridx = 0;
+		gbc_actionParentPane.gridy = 1;
+		transitionContentPane.add(actionParentPane, gbc_actionParentPane);
+		actionParentPane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_3 = new JLabel("Action");
+		actionParentPane.add(lblNewLabel_3, BorderLayout.WEST);
+		
+		JPanel actionPane = new JPanel();
+		actionParentPane.add(actionPane, BorderLayout.CENTER);
+		actionPane.setLayout(new BorderLayout(0, 0));
+		
+		actionText = new JTextField();
+		actionPane.add(actionText);
+		actionText.setColumns(10);
 		
 		JPanel statePane = new JPanel();
 		rightPane.setLeftComponent(statePane);
