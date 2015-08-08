@@ -9,6 +9,8 @@ import main.model.entity.Point;
 import main.model.entity.State;
 import main.model.entity.Transition;
 import main.model.entity.Transition.TransitionBuilder;
+import main.util.TouchEventClassfier;
+import main.util.TouchEventType;
 
 public class TransitionGetter {
 	
@@ -24,7 +26,6 @@ public class TransitionGetter {
 				
 				int seqId = rs.getInt(TransitionDBscheme.COLUMN_SEQ_ID);
 				String touchClass = rs.getString(TransitionDBscheme.COLUMN_TOUCHCLASS);
-				String touchEvent = rs.getString(TransitionDBscheme.COLUMN_TOUCHMODE);
 				int timestamp = rs.getInt(TransitionDBscheme.COLUMN_TIMESTAMP);
 				
 				String subSql = "SELECT * FROM " 
@@ -36,7 +37,9 @@ public class TransitionGetter {
 				ResultSet joinedRS = DBHelper.getInstance().getResultSet(subSql);
 				
 				List<Point> points = getPoints(joinedRS);
-			
+				
+				String touchEvent = getEventType(points);
+				
 				Transition t = new TransitionBuilder(
 								State.newInstance(seqId),State.newInstance(seqId+1))
 								.point(points)
@@ -54,7 +57,23 @@ public class TransitionGetter {
 		
 		return seqs;
 	}
+	
+	private static String getEventType(List<Point> points) {
 
+		int pointSize = points.size();
+		
+		double[] xs = new double[pointSize];
+		double[] ys = new double[pointSize];
+		
+		for(int i = 0; i < pointSize; ++i) {
+			Point p = points.get(i);
+			xs[i] = p.getX();
+			ys[i] = p.getY();
+		}
+	
+		return TouchEventClassfier.getTouchEventType(xs, ys).toString();
+	}
+	
 	private static List<Point> getPoints(ResultSet joinedRS) throws SQLException {
 		ArrayList<Point> points = new ArrayList<Point>();
 		

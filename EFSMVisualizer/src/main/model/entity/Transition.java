@@ -181,7 +181,7 @@ public class Transition {
 	@Override
 	public boolean equals(Object obj) {
 		Transition t = (Transition) obj;
-		return t.src.equals(src) && t.dst.equals(dst);
+		return event.equals(t.getEvent());
 	}
 
 	@Override

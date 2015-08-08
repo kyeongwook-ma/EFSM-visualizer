@@ -1,37 +1,27 @@
 package main.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
-import main.model.EFSMUtil;
 import main.model.ImageCacher;
 import main.model.ModelManager;
-import main.model.entity.EFSM;
 import main.model.entity.User;
 import main.util.DotUtil;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import net.miginfocom.swing.MigLayout;
-import java.awt.CardLayout;
 
 public class MainWindow {
 	private JFrame frame;
@@ -41,8 +31,8 @@ public class MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		DotUtil.generateBMImg();
-		ImageCacher.load();
+		//DotUtil.generateBMImg();
+		//ImageCacher.load();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -132,9 +122,6 @@ public class MainWindow {
 		transitionContentPane.add(screenParentPane, gbc_screenParentPane);
 		screenParentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_2 = new JLabel("Screen");
-		screenParentPane.add(lblNewLabel_2, BorderLayout.WEST);
-		
 		JPanel screenPane = new JPanel();
 		screenParentPane.add(screenPane, BorderLayout.CENTER);
 		screenPane.setLayout(new BorderLayout(0, 0));
@@ -142,6 +129,9 @@ public class MainWindow {
 		screenText = new JTextField();
 		screenPane.add(screenText);
 		screenText.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Screen");
+		screenPane.add(lblNewLabel_2, BorderLayout.WEST);
 		
 		JPanel actionParentPane = new JPanel();
 		GridBagConstraints gbc_actionParentPane = new GridBagConstraints();
@@ -173,7 +163,6 @@ public class MainWindow {
 		JPanel picPane = new JPanel();
 		statePane.add(picPane);
 		
-
 
 	}
 }

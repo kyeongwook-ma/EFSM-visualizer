@@ -38,6 +38,10 @@ public class ModelManager {
 				transitions.clear();
 			}
 		}
+		
+		for(User u : users) {
+			System.out.println(u.toString());
+		}
 	}
 
 	private EFSM generateUserEFSM(List<Transition> transitions) {
