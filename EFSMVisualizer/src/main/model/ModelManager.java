@@ -1,6 +1,7 @@
 package main.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import main.model.db.BMGetter;
@@ -36,6 +37,7 @@ public class ModelManager {
 				addUserBM(bms[i-1][0], userAFSM);
 				tmpUsrId = usrId;
 				transitions.clear();
+				continue;
 			}
 		}
 		
@@ -48,9 +50,8 @@ public class ModelManager {
 
 		EFSM afsm = new EFSM();
 
-		for(Transition t : transitions) {
-			afsm.addStateSeq(t);
-		}
+		afsm.addStateSeq(transitions.toArray(new Transition[transitions.size()]));
+		
 
 		return afsm;
 	}

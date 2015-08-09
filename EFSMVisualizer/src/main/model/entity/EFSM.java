@@ -53,14 +53,15 @@ public class EFSM implements DotLangGenerator {
 	}
 
 	public void addStateSeq(Transition... transitions) {
-		
+
 		if(transitionSeqs.size() == 0) {
 			transitionSeqs.addAll(Arrays.asList(transitions));
 			return;
 		}
-			
+		
 		for(Transition t : transitions) {
 			/* ������ transition �� ���Ͽ� ������ Ȯ���Ŵ */
+			
 			Transition lastTransition = endTransition();
 			
 			if(lastTransition.equals(t)) {

@@ -155,11 +155,6 @@ public class Transition {
 		StringBuilder sb = new StringBuilder();
 		sb.append( "\n" + src.toString() + " -> " + dst.toString() + "\n");
 		
-		for(Point p : this.getTouchPoint()) {
-			sb.append("x : " + p.getX() + " ,");
-			sb.append("y : " + p.getY() + " ,");
-		}
-		
 		sb.append("event : " + event + " ,");
 
 		Iterator<String> transitionTarget = getTargets();

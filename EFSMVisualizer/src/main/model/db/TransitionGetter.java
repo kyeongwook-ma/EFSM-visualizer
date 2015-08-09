@@ -10,7 +10,6 @@ import main.model.entity.State;
 import main.model.entity.Transition;
 import main.model.entity.Transition.TransitionBuilder;
 import main.util.TouchEventClassfier;
-import main.util.TouchEventType;
 
 public class TransitionGetter {
 	
@@ -38,7 +37,7 @@ public class TransitionGetter {
 				
 				List<Point> points = getPoints(joinedRS);
 				
-				String touchEvent = getEventType(points);
+				String touchEvent = rs.getString(TransitionDBscheme.COLUMN_TOUCHMODE);
 				
 				Transition t = new TransitionBuilder(
 								State.newInstance(seqId),State.newInstance(seqId+1))
@@ -50,6 +49,8 @@ public class TransitionGetter {
 				
 				seqs.add(t);
 			}
+			
+			
 						
 		} catch (SQLException e) {
 			e.printStackTrace();
