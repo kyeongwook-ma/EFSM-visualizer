@@ -37,7 +37,8 @@ public class TransitionGetter {
 				
 				List<Point> points = getPoints(joinedRS);
 				
-				String touchEvent = rs.getString(TransitionDBscheme.COLUMN_TOUCHMODE);
+				String touchEvent = getEventType(points);
+						// rs.getString(TransitionDBscheme.COLUMN_TOUCHMODE);
 				
 				Transition t = new TransitionBuilder(
 								State.newInstance(seqId),State.newInstance(seqId+1))

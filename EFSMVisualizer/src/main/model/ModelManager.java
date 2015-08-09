@@ -2,6 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import main.model.db.BMGetter;
@@ -21,8 +22,8 @@ public class ModelManager {
 		users = UserGetter.getUserFromDB();
 		int[][] bms = BMGetter.getUserBMFromDB();
 
-
-		ArrayList<Transition> transitions = new ArrayList<Transition>();
+		
+		HashSet<Transition> transitonSet = new HashSet<Transition>();
 		int tmpUsrId = bms[0][0];
 				
 		for(int i = 0; i < bms.length; ++i) {
@@ -31,18 +32,18 @@ public class ModelManager {
 			int usrId = bm[0];
 
 			if(tmpUsrId == usrId) {
-				transitions.addAll(getTransition(seqId));				
+				transitonSet.addAll(getTransition(seqId));
 			} else {
-				EFSM userAFSM = generateUserEFSM(transitions);
+				EFSM userAFSM = generateUserEFSM(new ArrayList<Transition>(transitonSet));
 				addUserBM(bms[i-1][0], userAFSM);
 				tmpUsrId = usrId;
-				transitions.clear();
+				transitonSet.clear();
 				continue;
 			}
 		}
 		
 		User lastUser = users.get(users.size()-1);
-		EFSM lastUserAFSM = generateUserEFSM(transitions);
+		EFSM lastUserAFSM = generateUserEFSM(new ArrayList<Transition>(transitonSet));
 		addUserBM(bms[bms.length-1][0], lastUserAFSM);
 		
 		for(User u : users) {
