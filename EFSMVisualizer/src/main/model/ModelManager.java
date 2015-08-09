@@ -41,6 +41,10 @@ public class ModelManager {
 			}
 		}
 		
+		User lastUser = users.get(users.size()-1);
+		EFSM lastUserAFSM = generateUserEFSM(transitions);
+		addUserBM(bms[bms.length-1][0], lastUserAFSM);
+		
 		for(User u : users) {
 			System.out.println(u.toString());
 		}
